@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+
+<h:body>
+
+	<p:menu>
+    	<p:menuitem value="Voltar" url="/faces/Categoria.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+	 
+	<h1>
+		<strong>Fase</strong>
+	</h1>
+	<h:form id="formfase">
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<p:outputLabel for="popup" value="Inicio: " />
+			<p:calendar id="popup"
+				value="#{faseMB.fas.dataInicio}" />
+
+			<p:outputLabel for="popup0" value="Fim: " />
+			<p:calendar id="popup0"
+				value="#{faseMB.fas.dataFim}" />
+				
+			<p:outputLabel value="Categoria: " />
+        		<p:selectCheckboxMenu id="cat" value="#{categoriaMB.categoria.nome}" label="Categorias" multiple="true"
+                              filter="true">
+           			 <f:selectItems value="#{categoriaMB.lista}" />
+        	</p:selectCheckboxMenu>
+        		
+				
+			<p:outputLabel value="Numero: " />
+			<p:inputText value="#{faseMB.fas.numero}" />
+
+		</h:panelGrid>
+
+		<p:commandButton value="Salvar" action="#{faseMB.salvar}" update=":formfase" />
+		
+		<h3>
+		
+		<strong>Cadastradas</strong>
+		
+		</h3>
+
+		<p:dataTable var="fas" value="#{faseMB.lista}">
+
+			<h:outputText value="Data Inicio Inscricao" />
+			<p:column colspan="2" headerText="Data Inicio Inscrição">
+				<h:outputText value="#{fas.dataInicio}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+
+			<h:outputText value="Data Fim Inscricao" />
+			<p:column colspan="2" headerText="Data Fim Inscrição">
+				<h:outputText value="#{fas.dataFim}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+			
+			<p:column colspan="2" headerText="Categoria:">
+			 <p:dataList value="#{categoriaMB.categoria.nome}" var="cat" >
+            </p:dataList>
+			</p:column>
+			
+			<p:column colspan="2" headerText="Numero:">
+				<p:outputLabel value="#{fas.numero}" />
+			</p:column>
+
+		</p:dataTable>
+		
+		<p:menu>
+    		<p:menuitem value="Grupos" url="/faces/Grupo.xhtml"  icon="ui-icon-disk" /> 
+		</p:menu>
+	</h:form>
+
+</h:body>
+</html>

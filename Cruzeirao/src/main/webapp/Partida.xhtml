@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	<p:menu>
+    	<p:menuitem value="Nova Partida" url="/faces/Partida.xhtml"  icon="ui-icon-disk" />
+    	<p:menuitem value="Sair" url="/faces/Menu.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+
+	<h1>Faça Aqui Sua Partida!</h1>
+
+	<h:form id="formpar">
+		<h:panelGrid columns="2" cellpadding="5"  style="margin-bottom:10px">
+
+			<p:outputLabel value = "Numero: "/>
+			<p:inputText value= "#{partidaMB.camp.numero}"/>
+			
+
+			<p:outputLabel for="popup" value="Data da Partida:" />
+			<p:calendar id="popup" value="#{partidaMB.camp.data}" />
+
+			<p:outputLabel value="Proxima Partida: " />
+			<p:inputText value="#{partidaMB.camp.proxPartida}" />
+
+			<p:outputLabel value="Grupo:" />
+			<p:inputText value="#{partidaMB.camp.grupo}" />
+
+			<p:outputLabel value="Sumula:" />
+			<p:inputText value="#{partidaMB.camp.relatoJuiz}" />
+        		
+		</h:panelGrid>
+
+		<p:commandButton value="Salvar" action="#{partidaMB.salvar}"
+			update=":formpar" />
+
+		<p:dataTable var="par" value="#{partidaMB.lista}">
+			
+			<p:column headerText="Cod">
+				<p:outputLabel value="#{par.numero}"/>
+			</p:column>
+			
+			<!--  <p:column colspan="2" headerText="Local">
+				<p:outputLabel value="#{par.local}" />
+			</p:column> -->
+
+			<h:outputText value="Popup:" />
+			<p:column colspan="2" headerText="Data Part.">
+				<h:outputText value="#{par.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+
+			<p:column colspan="3" headerText="Proxima Partida">
+				<p:outputLabel value="#{par.proxPartida}" />
+			</p:column>
+			<p:column colspan="2" headerText="Grupo">
+				<p:outputLabel value="#{par.grupo}" />
+			</p:column>
+			<p:column colspan="2" headerText="Sumula">
+				<p:outputLabel value="#{par.relatoJuiz}" />
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+</h:body>
+</html>

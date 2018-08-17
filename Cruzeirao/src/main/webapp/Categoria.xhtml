@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	
+	<p:menu>
+    	<p:menuitem value="Voltar" url="/faces/Campeonato.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+	
+	<h1>
+		<strong>Quais sao suas Categorias?</strong>
+	</h1>
+	<h:form id="formcategoria">
+
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<p:outputLabel value="Nome: " />
+			<p:inputText value="#{categoriaMB.categoria.nome}" />
+
+			<p:outputLabel value="Nascidos a partir de: " />
+			<p:inputText value="#{categoriaMB.categoria.nascidosApartirDe}" />
+
+			<p:outputLabel value="Jogadores Minimos: " />
+			<p:inputText value="#{categoriaMB.categoria.minJogadores}" />
+
+			<p:outputLabel value="Jogadores Maximos: " />
+			<p:inputText value="#{categoriaMB.categoria.maxJogadores}" />
+
+			<p:outputLabel value="Sexo: " />
+			<p:inputText value="#{categoriaMB.categoria.sexo}" />
+
+		</h:panelGrid>
+
+		<p:commandButton value="Salvar" action="#{categoriaMB.salvar}" update=":formcategoria" />
+		
+		<h3>Categorias Cadastradas</h3>
+
+		<p:dataTable var="cat" value="#{categoriaMB.lista}">
+
+			<p:column colspan="2" headerText="Nome">
+				<p:outputLabel value="#{cat.nome}" />
+			</p:column>
+
+			<p:column colspan="2" headerText="Nascido">
+				<p:outputLabel value="#{cat.nascidosApartirDe}" />
+			</p:column>
+
+			<p:column colspan="2" headerText="Jogadores Minimos">
+				<p:outputLabel value="#{cat.minJogadores}" />
+			</p:column>
+
+			<p:column colspan="2" headerText="Jogadores Maximos">
+				<p:outputLabel value="#{cat.maxJogadores}" />
+			</p:column>
+
+			<p:column colspan="2" headerText="Sexo">
+				<p:outputLabel value="#{cat.sexo}" />
+			</p:column>
+
+		</p:dataTable>
+		
+		<p:menu>
+    		<p:menuitem value="Fazer Inscrição" url="/faces/Inscricao.xhtml"  icon="ui-icon-disk" /> 
+    		<p:menuitem value="Fase" url="/faces/Fase.xhtml"  icon="ui-icon-disk" />
+		</p:menu>
+
+	</h:form>
+
+</h:body>
+</html>
