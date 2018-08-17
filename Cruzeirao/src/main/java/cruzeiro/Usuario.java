@@ -7,11 +7,16 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.primefaces.event.SelectEvent;
 
+@Entity
 public class Usuario {
 	
+	@Id
 	private int codigo;
 	private String email;
 	private String nome;
@@ -22,7 +27,10 @@ public class Usuario {
 	private String RG;
 	private String CPF;
 	
+	@Transient
 	private ArrayList<Equipe> equipes = new ArrayList<Equipe>();
+	
+	@Transient
 	private ArrayList<Campeonato> campeonatos = new ArrayList<>();
 	
 	public void onDateSelect(SelectEvent event) {
