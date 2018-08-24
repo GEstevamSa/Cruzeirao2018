@@ -72,7 +72,7 @@ public class UsuarioMB {
 		novoUsuario = new Usuario();
 		return "Usuario";
 	}
-	
+	/*
 	public String salvarEquipe()
 	{
 		usuarioService.salvarEquipe(novaEquipe);
@@ -460,4 +460,5 @@ public class UsuarioMB {
 	public void setRodAtual(Rodada rodAtual) {
 		this.rodAtual = rodAtual;
 	}
+	*/
 }
