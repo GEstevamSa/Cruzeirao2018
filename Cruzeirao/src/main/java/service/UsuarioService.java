@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import cruzeiro.Usuario;
 
@@ -13,7 +14,7 @@ import cruzeiro.Usuario;
 public class UsuarioService {
 	
 	private EntityManagerFactory emf;
-	private ArrayList <Usuario> usuarios = Dados.USUARIOS;
+	//private ArrayList <Usuario> usuarios = Dados.USUARIOS;
 	
 	public UsuarioService(){
 		emf = Persistence.createEntityManagerFactory("Cruzeirao");
@@ -29,19 +30,15 @@ public class UsuarioService {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public List<Usuario> getUsuarios() {
+		
+		List <Usuario> usuarios;
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createNamedQuery("Select a From Usuario a ");
+		usuarios = q.getResultList();
+		em.close();
 		return usuarios;
-	}
-
-	
-	
-	public Usuario getUsuarioId(String idUsuario) {
-		
-		for(int i=0; i< usuarios.size(); i++)
-			if(idUsuario == usuarios.get(i).getCPF())
-				return usuarios.get(i);
-		
-		return null;
 	}
 	
 	

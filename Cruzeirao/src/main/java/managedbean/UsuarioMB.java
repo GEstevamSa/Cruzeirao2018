@@ -101,33 +101,7 @@ public class UsuarioMB {
 		return usuarioService.getUsuarios();
 	}
 	
-	public String verEquipesCPF(String cpf)
-	{
-		usuarioAtual = usuarioService.getUsuarioId(cpf);
-		return "Equipe";
-	}
-	
-	public String verEquipes(Usuario usuario)
-	{
-		usuarioAtual = usuarioService.getUsuarioId(usuario.getCPF());
-		return criarEquipes();
-	}
-	
-	
-	public String verCampeonatosCPF(String cpf)
-	{
-		usuarioAtual = usuarioService.getUsuarioId(cpf);
-		return "Campeonato";
-	}
-	
-	
-	public String verCampeonatos(Usuario usuario)
-	{
-		usuarioAtual = usuarioService.getUsuarioId(usuario.getCPF());
-		return criarCampeonatos();
-	}
-	
-	
+
 	
 	
 	/*
