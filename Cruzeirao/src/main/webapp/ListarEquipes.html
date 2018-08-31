@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Lista</title>
+</h:head>
+
+<h:body>
+	 <p:menu>
+    	<p:menuitem value="Voltar" url="/faces/Usuario.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+	 
+	<p:outputLabel value="CPF: #{usuarioMB.usuarioAtual.CPF}"  />
+	<br/>
+	<p:outputLabel value="Nome: #{usuarioMB.usuarioAtual.nome}"  />
+
+<h3>Equipes Cadastradas</h3>
+
+
+	<h:form id="Equipe">
+
+
+
+		<p:dataTable var="equip" value="#{usuarioMB.novoUsuario.equipes}">
+		
+			<p:column colspan="2" headerText="Codigo Equipe">
+				<p:outputLabel value="#{equip.codigoequip}" />
+			</p:column>
+
+			<p:column colspan="2" headerText="Nome Equipe">
+				<p:outputLabel value="#{equip.nomeEquipe}" />
+			</p:column>
+
+			<h:outputText value="Popup:" />
+			<p:column colspan="2" headerText="Data Fundação">
+				<h:outputText value="#{equip.dataFundacao}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+
+			<p:column colspan="2" headerText="Cidade">
+				<p:outputLabel value="#{equip.cidade}" />
+			</p:column>
+			
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

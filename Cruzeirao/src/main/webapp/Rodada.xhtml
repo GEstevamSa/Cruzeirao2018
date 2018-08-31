@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+
+<h:body>
+
+	<p:menu>
+    	<p:menuitem value="Voltar" url="/faces/Grupo.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+	
+	<h1>
+		<strong>Rodada</strong>
+	</h1>
+	<h:form id="formrod">
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<p:outputLabel value="Numero: "/>
+			<p:inputText value="#{rodadaMB.camp.numero}"/>
+
+			<p:outputLabel value="Grupo: " />
+			<p:inputText value="#{rodadaMB.camp.grupo}" />
+
+		</h:panelGrid>
+
+		<p:commandButton value="Salvar" action="#{rodadaMB.salvar}" update=":formrod" />
+		
+		<h3>
+		
+		<strong>Rodadas: </strong>
+		
+		</h3>
+
+		<p:dataTable var="rod" value="#{rodadaMB.lista}">
+
+			<p:column colspan="2" headerText="Numero da Rodada: ">
+				<p:outputLabel value="#{rod.numero}" />
+			</p:column>
+
+			<p:column colspan="2" headerText="Grupo: ">
+				<p:outputLabel value="#{rod.grupo}" />
+			</p:column>
+		</p:dataTable>
+		
+		<p:menu>
+    		<p:menuitem value="Partida" url="/faces/Partida.xhtml"  icon="ui-icon-disk" /> 
+		</p:menu>
+		
+	</h:form>
+
+</h:body>
+</html>

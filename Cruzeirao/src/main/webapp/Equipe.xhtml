@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro</title>
+</h:head>
+
+<h:body>
+	 <p:menu>
+    	<p:menuitem value="Voltar" url="/faces/Usuario.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+	 
+	<p:outputLabel value="CPF: #{usuarioMB.usuarioAtual.CPF}"  />
+	<br/>
+	<p:outputLabel value="Nome: #{usuarioMB.usuarioAtual.nome}"  />
+
+	<h2>
+		<strong>Cadastro de Equipe</strong>
+	</h2>
+
+
+
+	<h:form id="formEquipe">
+
+		<h:panelGrid columns="2" cellpadding="5">
+			
+			<p:outputLabel value="Nome Equipe: " />
+			<p:inputText value="#{usuarioMB.novaEquipe.nome}" />
+
+			<p:outputLabel for="popup" value="Data Fundação: " />
+			<p:calendar id="popup" value="#{usuarioMB.novaEquipe.dataFundacao}" />
+
+			<p:outputLabel value="Cidade: " />
+			<p:inputText value="#{usuarioMB.novaEquipe.cidade}"/>
+
+		</h:panelGrid>
+
+
+		<p:commandButton action="#{usuarioMB.salvarEquipe}" value="Salvar" update=":formEquipe" />
+		
+		
+
+		<h3>Equipes Cadastradas</h3>
+
+		<p:dataTable var="equip" value="#{usuarioMB.usuarioAtual.equipes}">
+		
+
+			<p:column colspan="2" headerText="Nome Equipe">
+				<p:outputLabel value="#{equip.nome}" />
+			</p:column>
+
+			<h:outputText value="Popup:" />
+			<p:column colspan="2" headerText="Data Fundação">
+				<h:outputText value="#{equip.dataFundacao}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+
+			<p:column colspan="2" headerText="Cidade">
+				<p:outputLabel value="#{equip.cidade}" />
+			</p:column>
+			
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

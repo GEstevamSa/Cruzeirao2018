@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	<p:menu>
+    	<p:menuitem value="Voltar" url="/faces/Categoria.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+
+	<h1>Faça Aqui Sua Inscrição!</h1>
+
+	<h:form id="formInscri">
+		<h:panelGrid columns="2" cellpadding="5"  style="margin-bottom:10px">
+
+			<p:outputLabel value="Numero: " />
+			<p:inputText value="#{inscricaoMB.inscricao.numero}" />
+			
+			<p:outputLabel value="Pagamento: " />
+       		<p:selectBooleanButton id="pag" value="#{inscricaoMB.inscricao.pagamento}" onLabel="Sim" offLabel="Não" style="width:60px" />
+       		
+       		<p:outputLabel value="Validade: " />
+       		<p:selectBooleanButton id="valid" value="#{inscricaoMB.inscricao.validade}" onLabel="Sim" offLabel="Não" style="width:60px" />
+        		
+		</h:panelGrid>
+
+		<p:commandButton value="Salvar" action="#{inscricaoMB.salvar}"
+			update=":formInscri" />
+
+		<p:dataTable var="ins" value="#{inscricaoMB.lista}">
+			
+			<p:column headerText="Numero">
+				<p:outputLabel value="#{ins.numero}" />
+			</p:column>
+
+			<p:column colspan="2" headerText="Pagamento">
+				<p:outputLabel value="#{ins.pagamento}" />
+			</p:column>
+
+			<p:column colspan="2" headerText="Validade">
+				<p:outputLabel value="#{ins.validade}" />
+			</p:column>
+			
+			<p:column colspan="2" headerText="Equipes">
+				<p:outputLabel value="#{ins.nomeEquipe}" />
+			</p:column>
+			
+
+		</p:dataTable>
+
+	</h:form>
+
+</h:body>
+</html>

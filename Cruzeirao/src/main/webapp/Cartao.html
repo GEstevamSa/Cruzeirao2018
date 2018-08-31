@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	<p:menu>
+    	<p:menuitem value="Voltar" url="/faces/PartidaFutebol.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+
+		<h:form id="formCartao">
+			     <h:panelGrid columns="2">
+			     
+			           <<p:outputLabel value="Cartao Vermelho: "/>
+			           <p:inputText value="#{cartaoMB.cartao.vermelho}"/>
+			            
+			           <p:outputLabel value="Cartao Amarelo: "/>
+			           <p:inputText value="#{cartaoMB.cartao.amarelo}"/>
+			                
+			     </h:panelGrid>     
+			     <p:commandButton value="Salvar" action="#{cartaoMB.salvar}" update=":formCartao" />
+				
+				
+			     <p:dataTable var="cartao" value="#{cartaoMB.lista}">
+			       <p:column headerText="Cartao Vermelho">
+			          <p:outputLabel value="#{cartao.vermelho}"/>
+			       </p:column>
+			       <p:column headerText="Cartao Amarelo">
+			          <p:outputLabel value="#{cartao.amarelo}"/>
+			       </p:column>
+			     </p:dataTable>
+		</h:form>
+
+</h:body>
+</html>

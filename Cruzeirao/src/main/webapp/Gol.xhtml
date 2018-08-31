@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	<p:menu>
+    	<p:menuitem value="Voltar" url="/faces/PartidaFutebol.xhtml"  icon="ui-icon-disk" />
+	 </p:menu>
+	 <br/>
+
+			<h:form id="formGol">
+			     <h:panelGrid columns="2">
+			           <p:outputLabel value="Tempo: "/>
+			           <p:inputText value="#{golMB.gol.tempo}"/> 
+			           
+					<p:outputLabel value="Penalty" />
+       				<p:selectBooleanButton id="pag" value="#{gol.penalty}" onLabel="Sim" offLabel="Não" style="width:60px" />
+			       
+			          
+			    <br/>    
+			     </h:panelGrid>     
+			     <p:commandButton value="Salvar" action="#{golMB.salvar}" update=":formGol"	/>
+				 <br>
+				 </br>		
+			     <p:dataTable var="gol" value="#{golMB.lista}">
+			       <p:column headerText="Tempo">
+			          <p:outputLabel value="#{gol.tempo}"/>
+			       </p:column>
+			       
+			       <p:column headerText="Penalty">
+			          <p:outputLabel value="#{gol.penalty}"/>
+			       </p:column>
+			    
+			     </p:dataTable>
+			     
+			 </h:form>
+
+
+</h:body>
+</html>
