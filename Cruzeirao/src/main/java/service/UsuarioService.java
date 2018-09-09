@@ -35,7 +35,7 @@ public class UsuarioService {
 		
 		List <Usuario> usuarios;
 		EntityManager em = emf.createEntityManager();
-		Query q = em.createNamedQuery("Select a From Usuario a ");
+		Query q = em.createQuery("Select a From Usuario a ");
 		usuarios = q.getResultList();
 		em.close();
 		return usuarios;

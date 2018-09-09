@@ -2,11 +2,17 @@ package cruzeiro;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+@Entity
 public class Grupo {
 	
 	private String nome;
 	private Fase fase;
+	@Id
 	private int numero;
+	@Transient
 	private ArrayList<Rodada> rodadas = new ArrayList<>();
 	
 	

@@ -5,11 +5,14 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.primefaces.event.SelectEvent;
-
+@Entity
 public class Partida {
-	
+	@Id
 	private int numero;
 	private Inscricao equipeMandante;
 	private Inscricao equipeVisitante;
@@ -17,6 +20,7 @@ public class Partida {
 	private Partida proxPartida;
 	private Grupo grupo;
 	private String relatoJuiz;
+	@Transient
 	private Inscricao[] inscricoes = {new Inscricao(), new Inscricao()};
 	
 	

@@ -2,6 +2,14 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="Cruzeirao" transaction-type="RESOURCE_LOCAL">
 		<class>cruzeiro.Usuario</class>
+		<class>cruzeiro.Equipe</class>
+		<class>cruzeiro.Campeonato</class>
+		<class>cruzeiro.Categoria</class>
+		<class>cruzeiro.Inscricao</class>
+		<class>cruzeiro.Fase</class>
+		<class>cruzeiro.Grupo</class>
+		<class>cruzeiro.Rodada</class>
+		<class>cruzeiro.Partida</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/DBCruzeirao;create=true"/>
 			<property name="javax.persistence.jdbc.user" value="app"/>

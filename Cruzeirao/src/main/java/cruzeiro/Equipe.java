@@ -6,16 +6,27 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.primefaces.event.SelectEvent;
-
+@Entity
 public class Equipe {
-	
+	@Id
 	private String nome;
 	private Date dataFundacao;
 	private String cidade;
+	
+	@ManyToOne
+	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
+	
+	@Transient
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>(); 
+	@Transient
 	private ArrayList<Inscricao> inscricoes = new ArrayList<Inscricao>();
 	
 	public void onDateSelect(SelectEvent event) {

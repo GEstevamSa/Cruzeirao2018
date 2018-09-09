@@ -2,10 +2,15 @@ package cruzeiro;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+@Entity
 public class Rodada {
-	
+	@Id
 	private int numero;
 	private Grupo grupo;
+	@Transient
 	private ArrayList<Partida> partidas  = new ArrayList<>();
 	
 	public int getNumero() {

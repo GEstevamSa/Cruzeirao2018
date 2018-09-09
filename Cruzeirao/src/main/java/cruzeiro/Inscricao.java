@@ -2,8 +2,11 @@ package cruzeiro;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+@Entity
 public class Inscricao {
-	
+	@Id
 	private long numero;
 	private boolean pagamento;
 	private boolean validade;

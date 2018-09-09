@@ -6,8 +6,10 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.primefaces.event.SelectEvent;
@@ -27,9 +29,10 @@ public class Usuario {
 	private String telefoneMovel;
 	private String endereco;
 	
-	@Transient
+	@OneToMany(cascade=CascadeType.ALL, mappedBy= "usuario")
 	private ArrayList<Equipe> equipes = new ArrayList<Equipe>();
-	@Transient
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy= "usuario")
 	private ArrayList<Campeonato> campeonatos = new ArrayList<Campeonato>();
 	
 	public void onDateSelect(SelectEvent event) {
