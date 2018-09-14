@@ -41,5 +41,16 @@ public class UsuarioService {
 		return usuarios;
 	}
 	
+	public Usuario getUsuarioId(Usuario usuario) {
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		//em.find(Usuario.class, arg1);
+		em.persist(usuario.getCPF());
+		em.getTransaction().commit();
+		em.close();
+		
+		return usuario;
+	}
 	
 }

@@ -51,9 +51,6 @@
 		</h:panelGrid>
 
 		<p:commandButton value="Salvar" action="#{usuarioMB.salvar}" update=":formUsuario" />
-		
-		
-		
 
 		<p:dataTable var="usu" value="#{usuarioMB.usuarios}">
 			
@@ -94,7 +91,7 @@
 			</p:column>
 			
 			<p:column colspan="3" headerText="Opções" >
-				<p:commandLink action="#{usuarioMB.verEquipes(usu)}" icon="ui-icon-disk" value="Adicionar Equipe" />
+				<p:commandLink action="#{usuarioMB.verEquipesCPF(usu)}" icon="ui-icon-disk" value="Adicionar Equipe" />
 				<br/>
 				<p:commandLink action="#{usuarioMB.verCampeonatos(usu)}" icon="ui-icon-disk" value="Adicionar Campeonato" />
 			</p:column>

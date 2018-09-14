@@ -101,13 +101,12 @@ public class UsuarioMB {
 		return usuarioService.getUsuarios();
 	}
 	
-	/*
 	public String verEquipesCPF (Usuario usuario)
 	{
-		usuarioAtual = usuarioService.getUsuarioId(usuario.getCPF());
+		usuarioAtual = usuarioService.getUsuarioId(usuario);
 		return criarEquipes();
 	}
-	
+	/*
 	public String verCampeonatos (Usuario usuario) 
 	{
 		usuarioAtual = usuarioService.getUsuarioId(usuario.getCPF());

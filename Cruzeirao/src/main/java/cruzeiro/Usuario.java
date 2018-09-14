@@ -7,7 +7,10 @@ import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -19,7 +22,10 @@ public class Usuario {
 	
 	
 	@Id
-	private String CPF;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int CPF;
+	
 	private String nome;
 	private String RG;
 	private String sexo;
@@ -106,10 +112,10 @@ public class Usuario {
 	public void setRG(String rg) {
 		this.RG = rg;
 	}
-	public String getCPF() {
+	public int getCPF() {
 		return CPF;
 	}
-	public void setCPF(String cpf) {
+	public void setCPF(int cpf) {
 		this.CPF = cpf;
 	}
 	

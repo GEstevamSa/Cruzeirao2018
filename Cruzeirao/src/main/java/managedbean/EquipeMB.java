@@ -4,13 +4,12 @@ package managedbean;
 
 import java.util.List;
 
-import javax.annotation.ManagedBean;
+
 import javax.faces.bean.SessionScoped;
 
 import cruzeiro.Equipe;
 import service.EquipeService;
 
-@ManagedBean
 @SessionScoped
 public class EquipeMB {
 	
