@@ -22,10 +22,8 @@ public class Usuario {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int CPF;
-	
+	private String CPF;
 	private String nome;
 	private String RG;
 	private String sexo;
@@ -35,10 +33,10 @@ public class Usuario {
 	private String telefoneMovel;
 	private String endereco;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy= "usuario")
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy= "usuario")
 	private ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy= "usuario")
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy= "usuario")
 	private ArrayList<Campeonato> campeonatos = new ArrayList<Campeonato>();
 	
 	public void onDateSelect(SelectEvent event) {
@@ -112,10 +110,10 @@ public class Usuario {
 	public void setRG(String rg) {
 		this.RG = rg;
 	}
-	public int getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
-	public void setCPF(int cpf) {
+	public void setCPF(String cpf) {
 		this.CPF = cpf;
 	}
 	

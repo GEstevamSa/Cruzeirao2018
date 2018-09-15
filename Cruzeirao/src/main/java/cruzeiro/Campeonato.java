@@ -7,10 +7,14 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.primefaces.event.SelectEvent;
@@ -20,9 +24,13 @@ public class Campeonato {
 	
 	@Id
 	private String nome;
-	@Transient
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="campeonato")
 	private ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-	@Transient
+	
+	//@ManyToMany
+	//@JoinTable
+	//joinColumns=@JoinColumn(name="idUsuario"),
+	//inverseJoinColumns=@JoinColumn(name="idcampeonato")
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	
 	private Date dataInicioInscricao;

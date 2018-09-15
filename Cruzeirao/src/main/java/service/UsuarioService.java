@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import cruzeiro.Usuario;
+import managedbean.UsuarioMB;
 
 
 public class UsuarioService {
@@ -41,16 +42,14 @@ public class UsuarioService {
 		return usuarios;
 	}
 	
-	public Usuario getUsuarioId(Usuario usuario) {
+	public Usuario getUsuarioIdbyCPF(String cpf) {
 		
 		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		//em.find(Usuario.class, arg1);
-		em.persist(usuario.getCPF());
-		em.getTransaction().commit();
+		
+		Usuario user = em.find(Usuario.class,cpf);
 		em.close();
 		
-		return usuario;
+		return user;
 	}
 	
 }

@@ -17,7 +17,7 @@ import cruzeiro.Equipe;
 public class UsuarioMB {
 	
 	private UsuarioService usuarioService = new UsuarioService();
-	
+
 	private Equipe novaEquipe;
 	private Campeonato novoCampeonato;
 	private Usuario usuarioAtual;
@@ -103,14 +103,14 @@ public class UsuarioMB {
 	
 	public String verEquipesCPF (Usuario usuario)
 	{
-		usuarioAtual = usuarioService.getUsuarioId(usuario);
+		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
 		return criarEquipes();
 	}
-	/*
+	
 	public String verCampeonatos (Usuario usuario) 
 	{
-		usuarioAtual = usuarioService.getUsuarioId(usuario.getCPF());
+		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
 	return criarCampeonatos();
 	}
-	*/
+	
 }
