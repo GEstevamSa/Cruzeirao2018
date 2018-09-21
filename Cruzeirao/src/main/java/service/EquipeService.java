@@ -1,8 +1,5 @@
 package service;
 
-
-
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import cruzeiro.Equipe;
+import cruzeiro.Usuario;
 
 
 public class EquipeService {
@@ -41,29 +39,13 @@ public class EquipeService {
 		return equipes;
 	}
 	
-	
-	
-	
-	
-	
-	
-/*	
-private ArrayList<Equipe> equipes = Dados.EQUIPES;
-	
-	public List<Equipe> getEquipes() {
-		return equipes;
-	}
-	
-	public void salvar(Equipe equipe) {
-		equipes.add(equipe);
-	}
-	
-	public Equipe getEquipeByNome(String idNome) {
-		for(int i=0; i< equipes.size(); i++)
-			if(idNome == equipes.get(i).getNome())
-				return equipes.get(i);
+	public Equipe getEquipeByNome(String nome) {
 		
-		return null;
+		EntityManager em = emf.createEntityManager();
+		
+		Equipe equip = em.find(Equipe.class,nome);
+		em.close();
+		
+		return equip;
 	}
-	*/
 }

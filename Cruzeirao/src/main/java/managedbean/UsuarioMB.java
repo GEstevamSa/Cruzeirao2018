@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import cruzeiro.Usuario;
+import service.EquipeService;
 import service.UsuarioService;
 import cruzeiro.Campeonato;
 import cruzeiro.Equipe;
@@ -17,7 +18,8 @@ import cruzeiro.Equipe;
 public class UsuarioMB {
 	
 	private UsuarioService usuarioService = new UsuarioService();
-
+	private EquipeService equipeService = new EquipeService();
+	
 	private Equipe novaEquipe;
 	private Campeonato novoCampeonato;
 	private Usuario usuarioAtual;
@@ -44,48 +46,13 @@ public class UsuarioMB {
 		return "Campeonato";
 	}
 	
-
-	public String salvarEquipe()
-	{
-		usuarioAtual.addEquipe(getNovaEquipe());
-		novaEquipe.setUsuario(usuarioAtual);
-		return "Equipe";
-	}
-	
-	
-	public String salvarCampeonato()
-	{
-		usuarioAtual.addCampeonatos(novoCampeonato);
-		novoCampeonato.setUsuario(usuarioAtual);
-		return "Campeonato";
-	}
-	
 	public Usuario getNovoUsuario() {
 		return novoUsuario;
 	}
 
-
 	public void setNovoUsuario(Usuario novoUsuario) {
 		this.novoUsuario = novoUsuario;
 	}
-
-
-	public Equipe getNovaEquipe() {
-		return novaEquipe;
-	}
-
-	public void setNovaEquipe(Equipe novaEquipe) {
-		this.novaEquipe = novaEquipe;
-	}
-	
-	public Campeonato getNovoCampeonato() {
-		return novoCampeonato;
-	}
-	
-	public void setNovoCampeonato(Campeonato novocampeonato) {
-		this.novoCampeonato = novocampeonato;
-	}
-
 
 	public Usuario getUsuarioAtual() {
 		return usuarioAtual;
@@ -113,4 +80,76 @@ public class UsuarioMB {
 	return criarCampeonatos();
 	}
 	
+	public String salvarEquipe()
+	{
+		novaEquipe.setUsuario(usuarioAtual);
+		usuarioAtual.addEquipe(novaEquipe);
+		equipeService.salvar(novaEquipe);
+		
+		novaEquipe = new Equipe();
+		return "menu";
+		/*
+		
+		return EquipeMB.salvar();
+		*/
+	}
+
+
+	public String salvarCampeonato()
+	{
+		usuarioAtual.addCampeonatos(novoCampeonato);
+		novoCampeonato.setUsuario(usuarioAtual);
+		return "Campeonato";
+	}
+
+	public Equipe getNovaEquipe() {
+		return novaEquipe;
+	}
+
+	public void setNovaEquipe(Equipe novaEquipe) {
+		this.novaEquipe = novaEquipe;
+	}
+
+	public Campeonato getNovoCampeonato() {
+		return novoCampeonato;
+	}
+
+	public void setNovoCampeonato(Campeonato novocampeonato) {
+		this.novoCampeonato = novocampeonato;
+	}
+	
 }
+
+/*
+public String salvarEquipe()
+{
+	usuarioAtual.addEquipe(getNovaEquipe());
+	novaEquipe.setUsuario(usuarioAtual);
+	return "Equipe";
+}
+
+
+public String salvarCampeonato()
+{
+	usuarioAtual.addCampeonatos(novoCampeonato);
+	novoCampeonato.setUsuario(usuarioAtual);
+	return "Campeonato";
+}
+
+public Equipe getNovaEquipe() {
+	return novaEquipe;
+}
+
+public void setNovaEquipe(Equipe novaEquipe) {
+	this.novaEquipe = novaEquipe;
+}
+
+public Campeonato getNovoCampeonato() {
+	return novoCampeonato;
+}
+
+public void setNovoCampeonato(Campeonato novocampeonato) {
+	this.novoCampeonato = novocampeonato;
+}
+
+*/

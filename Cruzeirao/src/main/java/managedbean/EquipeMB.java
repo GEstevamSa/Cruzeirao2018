@@ -1,21 +1,21 @@
 package managedbean;
 
-
-
 import java.util.List;
 
-
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import cruzeiro.Equipe;
 import service.EquipeService;
 
+@ManagedBean
 @SessionScoped
 public class EquipeMB {
 	
 	private EquipeService equipeService = new EquipeService();
-	private Equipe equipe = new Equipe();
-	private Equipe novaEquipe;
+	
+	private Equipe equipeAtual;
+	private Equipe novaEquipe = new Equipe();
 	
 	public String salvar() {
 		equipeService.salvar(novaEquipe);
@@ -29,38 +29,27 @@ public class EquipeMB {
 	}
 	
 	public Equipe getEquipe() {
-		return equipe;
+		return equipeAtual;
 	}
 
-	
-	
-	/*
-	
-	
-	private ArrayList<Equipe> lista = new ArrayList<Equipe>();
-	
-	private Equipe equipe =  new Equipe();
-		
-	public String salvar() {
-		lista.add(equipe);
-		equipe = new Equipe();
-		return "Equipe";
+	public EquipeService getEquipeService() {
+		return equipeService;
 	}
 
-	public ArrayList<Equipe> getLista() {
-		return lista;
+	public void setEquipeService(EquipeService equipeService) {
+		this.equipeService = equipeService;
 	}
 
-	public void setLista(ArrayList<Equipe> lista) {
-		this.lista = lista;
+	public Equipe getNovaEquipe() {
+		return novaEquipe;
 	}
 
-	public Equipe getEquipe() {
-		return equipe;
+	public void setNovaEquipe(Equipe novaEquipe) {
+		this.novaEquipe = novaEquipe;
 	}
 
 	public void setEquipe(Equipe equipe) {
-		this.equipe = equipe;
+		this.equipeAtual = equipe;
 	}
-	*/
+	
 }

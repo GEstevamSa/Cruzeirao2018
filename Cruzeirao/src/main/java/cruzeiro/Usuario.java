@@ -19,8 +19,6 @@ import org.primefaces.event.SelectEvent;
 
 @Entity
 public class Usuario {
-	
-	
 	@Id
 	@Column(name = "id")
 	private String CPF;
