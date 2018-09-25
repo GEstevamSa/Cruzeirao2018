@@ -65,6 +65,17 @@
 				<p:outputLabel value="#{equip.cidade}" />
 			</p:column>
 			
+			<p:column colspan="2">
+			<h:form>
+		    <p:growl id="messages" />
+		 
+		    <p:splitButton value="Atualizar" actionListener="#{equipe.atualizar}" update="messages" icon="ui-icon-arrowrefresh-1-w">
+		        <p:menuitem value="Deletar" actionListener="#{equipe.deletar}" ajax="false" icon="ui-icon-close" />
+		        <p:separator />
+		    </p:splitButton>
+			</h:form>
+			</p:column>
+			
 		</p:dataTable>
 	</h:form>
 

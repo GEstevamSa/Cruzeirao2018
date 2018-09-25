@@ -1,5 +1,6 @@
 package cruzeiro;
 
+import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,6 +38,19 @@ public class Equipe {
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", 
         		format.format(event.getObject())));
     }
+	
+	public void atualizar(ActionEvent actionEvent) {
+		addMessage("Valor Atualizado com sucesso");
+	}
+	
+	public void deletar(ActionEvent actionEvent) {
+		addMessage("Valor Deletado com sucesso");
+	}
+	
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,summary,null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
 
 	public String getNome() {
 		return nome;

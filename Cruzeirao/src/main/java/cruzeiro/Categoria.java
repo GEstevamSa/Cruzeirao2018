@@ -1,7 +1,10 @@
 package cruzeiro;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
@@ -23,6 +26,18 @@ public class Categoria {
 	private int maxJogadores;
 	private String sexo;
 	
+	public void atualizar(ActionEvent actionEvent) {
+		addMessage("Valor Atualizado com sucesso");
+	}
+	
+	public void deletar(ActionEvent actionEvent) {
+		addMessage("Valor Deletado com sucesso");
+	}
+	
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,summary,null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
 
 	public String getNome() {
 		return nome;

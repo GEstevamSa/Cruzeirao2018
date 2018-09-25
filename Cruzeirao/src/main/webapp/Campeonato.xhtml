@@ -53,7 +53,7 @@
 
 		</h:panelGrid>
 
-		<p:commandButton action="#{usuarioMB.salvarCampeonato}" value="Salvar" update=":formCampeonato"/>
+		<p:commandButton action="#{usuarioMB.salvarCampeonato()}" value="Salvar" update=":formCampeonato"/>
 
 		<h3>Campeonatos Cadastrados</h3>
 		
@@ -95,6 +95,17 @@
 			<p:column colspan="2" headerText="Taxa">
 				<span class="ui-inputgroup-addon">$</span>
 				<p:outputLabel value="#{cam.valorTaxa}" />
+			</p:column>
+			
+			<p:column colspan="2">
+			<h:form>
+		    <p:growl id="messages" />
+		 
+		    <p:splitButton value="Atualizar" actionListener="#{campeonato.atualizar}" update="messages" icon="ui-icon-arrowrefresh-1-w">
+		        <p:menuitem value="Deletar" actionListener="#{campeonato.deletar}" ajax="false" icon="ui-icon-close" />
+		        <p:separator />
+		    </p:splitButton>
+			</h:form>
 			</p:column>
 
 			<p:column headerText="Opções" >

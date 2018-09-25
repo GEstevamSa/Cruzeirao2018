@@ -69,6 +69,17 @@
 				<p:outputLabel value="#{cat.sexo}" />
 			</p:column>
 			
+			<p:column colspan="2">
+			<h:form>
+		    <p:growl id="messages" />
+		 
+		    <p:splitButton value="Atualizar" actionListener="#{categoria.atualizar}" update="messages" icon="ui-icon-arrowrefresh-1-w">
+		        <p:menuitem value="Deletar" actionListener="#{categoria.deletar}" ajax="false" icon="ui-icon-close" />
+		        <p:separator />
+		    </p:splitButton>
+			</h:form>
+			</p:column>
+			
 			<p:column headerText="Opções" >
 				<p:commandLink action="#{categoriaMB.verFases(cat)}" value="Ver Fases" />
 			</p:column>

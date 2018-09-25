@@ -9,8 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -43,7 +41,6 @@ public class Usuario {
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", 
         		format.format(event.getObject())));
     }
-
 	
 	public String getEmail() {
 		return email;
@@ -69,7 +66,6 @@ public class Usuario {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
 	@Transient
 	public ArrayList<Equipe> getEquipes() {
 		return equipes;
@@ -77,7 +73,6 @@ public class Usuario {
 	public void setEquipes(ArrayList<Equipe> equipes) {
 		this.equipes = equipes;
 	}
-	
 	public ArrayList<Campeonato> getCampeonatos() {
 		return campeonatos;
 	}
@@ -114,15 +109,12 @@ public class Usuario {
 	public void setCPF(String cpf) {
 		this.CPF = cpf;
 	}
-	
 	public void addEquipe(Equipe equipe)
 	{
 		equipes.add(equipe);
 	}
-	
 	public void addCampeonatos(Campeonato campeonato)
 	{
 		campeonatos.add(campeonato);
 	}	
-	
 }

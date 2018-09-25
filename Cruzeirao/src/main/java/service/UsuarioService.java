@@ -1,22 +1,17 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
 import cruzeiro.Usuario;
-import managedbean.UsuarioMB;
-
 
 public class UsuarioService {
 	
 	private EntityManagerFactory emf;
-	//private ArrayList <Usuario> usuarios = Dados.USUARIOS;
-	
+	private EntityManager em;
+
 	public UsuarioService(){
 		emf = Persistence.createEntityManagerFactory("Cruzeirao");
 	}
@@ -30,6 +25,21 @@ public class UsuarioService {
 		em.close();
 	}
 	
+	public void alterar(Usuario usuario) {
+		em.getTransaction().begin();
+		usuario = em.merge(usuario);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public void remover(Usuario usuario) {
+		
+		usuario = getUsuarioIdbyCPF(usuario.getCPF());
+		em.getTransaction().begin();
+		em.remove(usuario);
+		em.getTransaction().commit();
+		em.close();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Usuario> getUsuarios() {
@@ -45,11 +55,8 @@ public class UsuarioService {
 	public Usuario getUsuarioIdbyCPF(String cpf) {
 		
 		EntityManager em = emf.createEntityManager();
-		
 		Usuario user = em.find(Usuario.class,cpf);
 		em.close();
-		
 		return user;
 	}
-	
 }

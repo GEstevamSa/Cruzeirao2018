@@ -90,6 +90,17 @@
 				<p:outputLabel value="#{usu.endereco}" />
 			</p:column>
 			
+			<p:column colspan="3">
+			<h:form>
+		    <p:growl id="messages" />
+		 
+		    <p:splitButton value="Atualizar" actionListener="#{usuarioMB.atualizar(usu)}" update="messages" icon="ui-icon-arrowrefresh-1-w">
+		        <p:menuitem value="Deletar" actionListener="#{usuarioMB.deletar(usu)}" ajax="false" icon="ui-icon-close" />
+		        <p:separator />
+		    </p:splitButton>
+			</h:form>
+			</p:column>
+
 			<p:column colspan="3" headerText="Opções" >
 				<p:commandLink action="#{usuarioMB.verEquipesCPF(usu)}" icon="ui-icon-disk" value="Adicionar Equipe" />
 				<br/>

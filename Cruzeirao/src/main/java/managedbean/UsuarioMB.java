@@ -1,17 +1,15 @@
 package managedbean;
 
-
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+import org.primefaces.event.RowEditEvent;
 import cruzeiro.Usuario;
+import service.CampeonatoService;
 import service.EquipeService;
 import service.UsuarioService;
 import cruzeiro.Campeonato;
 import cruzeiro.Equipe;
-
 
 @ManagedBean
 @SessionScoped
@@ -19,14 +17,13 @@ public class UsuarioMB {
 	
 	private UsuarioService usuarioService = new UsuarioService();
 	private EquipeService equipeService = new EquipeService();
+	private CampeonatoService campeonatoService = new CampeonatoService();
 	
 	private Equipe novaEquipe;
 	private Campeonato novoCampeonato;
 	private Usuario usuarioAtual;
 	
 	private Usuario novoUsuario = new Usuario();
-	
-	
 	
 	public String salvar() {
 		usuarioService.salvar(novoUsuario);
@@ -58,7 +55,6 @@ public class UsuarioMB {
 		return usuarioAtual;
 	}
 
-
 	public void setUsuarioAtual(Usuario usuarioAtual) {
 		this.usuarioAtual = usuarioAtual;
 	}
@@ -88,17 +84,15 @@ public class UsuarioMB {
 		
 		novaEquipe = new Equipe();
 		return "menu";
-		/*
-		
-		return EquipeMB.salvar();
-		*/
 	}
-
 
 	public String salvarCampeonato()
 	{
-		usuarioAtual.addCampeonatos(novoCampeonato);
 		novoCampeonato.setUsuario(usuarioAtual);
+		usuarioAtual.addCampeonatos(novoCampeonato);
+		campeonatoService.salvar(novoCampeonato);
+		
+		novoCampeonato = new Campeonato();
 		return "Campeonato";
 	}
 
@@ -118,38 +112,12 @@ public class UsuarioMB {
 		this.novoCampeonato = novocampeonato;
 	}
 	
+	public void atualizar(RowEditEvent event) {
+
+		Usuario a = ((Usuario) event.getObject());
+		usuarioService.alterar(a);
+	}
+	public void deletar(Usuario usuario) {
+		usuarioService.remover(usuario);
+	}
 }
-
-/*
-public String salvarEquipe()
-{
-	usuarioAtual.addEquipe(getNovaEquipe());
-	novaEquipe.setUsuario(usuarioAtual);
-	return "Equipe";
-}
-
-
-public String salvarCampeonato()
-{
-	usuarioAtual.addCampeonatos(novoCampeonato);
-	novoCampeonato.setUsuario(usuarioAtual);
-	return "Campeonato";
-}
-
-public Equipe getNovaEquipe() {
-	return novaEquipe;
-}
-
-public void setNovaEquipe(Equipe novaEquipe) {
-	this.novaEquipe = novaEquipe;
-}
-
-public Campeonato getNovoCampeonato() {
-	return novoCampeonato;
-}
-
-public void setNovoCampeonato(Campeonato novocampeonato) {
-	this.novoCampeonato = novocampeonato;
-}
-
-*/
