@@ -119,5 +119,6 @@ public class UsuarioMB {
 	}
 	public void deletar(Usuario usuario) {
 		usuarioService.remover(usuario);
+		
 	}
 }

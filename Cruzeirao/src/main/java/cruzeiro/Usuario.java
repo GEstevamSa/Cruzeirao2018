@@ -12,6 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import org.primefaces.event.SelectEvent;
 
@@ -30,6 +32,7 @@ public class Usuario implements Serializable{
 	private String RG;
 	private String sexo;
 	private String email;
+	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	private String telefoneFixo;
 	private String telefoneMovel;

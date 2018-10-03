@@ -125,6 +125,11 @@
 			
 			<p:column style="width:32px">
            		<p:rowEditor />
+           		
+           		<p:commandLink 
+           		id="deletar" actionListener="#{usuarioMB. deletar(usu)}" 
+           		styleClass="ui-icon ui-icon-trash" style="text-align:center" 
+           		update="Usuario"/>
        	   	</p:column>
 
 			<p:column colspan="3" headerText="Opções" >
