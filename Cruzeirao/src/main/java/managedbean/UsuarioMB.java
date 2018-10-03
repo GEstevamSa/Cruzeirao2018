@@ -114,7 +114,7 @@ public class UsuarioMB {
 	
 	public void atualizar(RowEditEvent event) {
 
-		Usuario a = ((Usuario) event.getObject());
+		Usuario a =	 ((Usuario) event.getObject());
 		usuarioService.alterar(a);
 	}
 	public void deletar(Usuario usuario) {

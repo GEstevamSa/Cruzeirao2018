@@ -51,55 +51,81 @@
 		</h:panelGrid>
 
 		<p:commandButton value="Salvar" action="#{usuarioMB.salvar}" update=":formUsuario" />
+		
+		
 
-		<p:dataTable var="usu" value="#{usuarioMB.usuarios}">
+		<p:dataTable var="usu" 
+			value="#{usuarioMB.usuarios}"   
+			id="Usuario" editable="true" 
+			
+			paginator="true" rows="5"
+       		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15" >
+			
+			<p:ajax event="rowEdit" listener="#{usuarioMB.atualizar}" update="Usuario" />
 			
 
 			<p:column colspan="2" headerText="Nome">
-				<p:outputLabel value="#{usu.nome}" />
+			  <p:cellEditor>
+			  <f:facet name="output"><p:outputLabel value="#{usu.nome}" /></f:facet>
+			  <f:facet name="input"><p:inputText value="#{usu.nome}" style="width:100%" id="nome" /></f:facet>
+			  </p:cellEditor>
 			</p:column>
-
+			
 			<h:outputText value="Popup:" />
 			<p:column colspan="2" headerText="Data Nasc.">
+			<f:facet name="Data Nasc.">
 				<h:outputText value="#{usu.dataNascimento}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:outputText>
+			</f:facet>
 			</p:column>
 
 			<p:column colspan="3" headerText="Email">
-				<p:outputLabel value="#{usu.email}" />
+			  <p:cellEditor>
+			   <f:facet name="output"><p:outputLabel value="#{usu.nome}" /></f:facet>
+			   <f:facet name="input"><p:inputText value="#{usu.nome}" style="width:100%" id="Email" /></f:facet>
+			  </p:cellEditor>
+			</p:column>
+
+			
+			<p:column colspan="2" headerText="TelFixo">
+			  <p:cellEditor>
+			   <f:facet name="output"><p:outputLabel value="#{usu.telefoneFixo}" /></f:facet>
+			   <f:facet name="input"><p:inputText value="#{usu.telefoneFixo}" style="width:100%" id="TelFixo" /></f:facet>
+			  </p:cellEditor>
 			</p:column>
 			
-			<p:column colspan="2" headerText="Tel.Fixo">
-				<p:outputLabel value="#{usu.telefoneFixo}" />
-			</p:column>
-			
-			<p:column colspan="2" headerText="Tel.Movel">
-				<p:outputLabel value="#{usu.telefoneMovel}" />
+			<p:column colspan="2" headerText="TelMovel">
+			  <p:cellEditor>
+			   <f:facet name="output"><p:outputLabel value="#{usu.telefoneMovel}" /></f:facet>
+			   <f:facet name="input"><p:inputText value="#{usu.telefoneMovel}" style="width:100%" id="TelMovel" /></f:facet>
+			  </p:cellEditor>
 			</p:column>
 			
 			<p:column colspan="2" headerText="RG">
-				<p:outputLabel value="#{usu.RG}" />
+			  <p:cellEditor>
+			   <f:facet name="output"><p:outputLabel value="#{usu.RG}" /></f:facet>
+			   <f:facet name="input"><p:inputText value="#{usu.RG}" style="width:100%" id="RG" /></f:facet>
+			  </p:cellEditor>
 			</p:column>
 			
 			<p:column colspan="2" headerText="CPF">
+			<f:facet name="CPF">
 				<p:outputLabel value="#{usu.CPF}" />
+			</f:facet>
 			</p:column>
 			
 			<p:column colspan="2" headerText="Endereço">
-				<p:outputLabel value="#{usu.endereco}" />
+				  <p:cellEditor>
+				  <f:facet name="output"><p:outputLabel value="#{usu.endereco}" /></f:facet>
+			      <f:facet name="input"><p:inputText value="#{usu.endereco}" style="width:100%" id="Endereço" /></f:facet>
+				  </p:cellEditor>
 			</p:column>
 			
-			<p:column colspan="3">
-			<h:form>
-		    <p:growl id="messages" />
-		 
-		    <p:splitButton value="Atualizar" actionListener="#{usuarioMB.atualizar(usu)}" update="messages" icon="ui-icon-arrowrefresh-1-w">
-		        <p:menuitem value="Deletar" actionListener="#{usuarioMB.deletar(usu)}" ajax="false" icon="ui-icon-close" />
-		        <p:separator />
-		    </p:splitButton>
-			</h:form>
-			</p:column>
+			<p:column style="width:32px">
+           		<p:rowEditor />
+       	   	</p:column>
 
 			<p:column colspan="3" headerText="Opções" >
 				<p:commandLink action="#{usuarioMB.verEquipesCPF(usu)}" icon="ui-icon-disk" value="Adicionar Equipe" />

@@ -10,7 +10,6 @@ import cruzeiro.Usuario;
 public class UsuarioService {
 	
 	private EntityManagerFactory emf;
-	private EntityManager em;
 
 	public UsuarioService(){
 		emf = Persistence.createEntityManagerFactory("Cruzeirao");
@@ -25,17 +24,20 @@ public class UsuarioService {
 		em.close();
 	}
 	
-	public void alterar(Usuario usuario) {
+	public void alterar(Usuario usuario) 
+	{
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		usuario = em.merge(usuario);
+		em.merge(usuario);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
 	public void remover(Usuario usuario) {
 		
-		usuario = getUsuarioIdbyCPF(usuario.getCPF());
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
+		usuario = em.find(Usuario.class,usuario.getCPF());
 		em.remove(usuario);
 		em.getTransaction().commit();
 		em.close();

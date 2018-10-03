@@ -1,5 +1,6 @@
 package cruzeiro;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,11 +13,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
-
 import org.primefaces.event.SelectEvent;
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	@Id
 	@Column(name = "id")
 	private String CPF;
@@ -41,6 +47,7 @@ public class Usuario {
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", 
         		format.format(event.getObject())));
     }
+	
 	
 	public String getEmail() {
 		return email;
