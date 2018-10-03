@@ -9,6 +9,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,8 +19,11 @@ import javax.persistence.Transient;
 import org.primefaces.event.SelectEvent;
 @Entity
 public class Equipe {
+	
 	@Id
 	@Column(name= "id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	private String nome;
 	private Date dataFundacao;
 	private String cidade;
@@ -50,6 +55,17 @@ public class Equipe {
 	public void addMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,summary,null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {

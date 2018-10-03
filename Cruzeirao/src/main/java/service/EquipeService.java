@@ -8,7 +8,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import cruzeiro.Equipe;
-import cruzeiro.Usuario;
 
 
 public class EquipeService {
@@ -27,6 +26,24 @@ public class EquipeService {
 		em.close();
 	}
 	
+	public void alterar(Equipe equipe) 
+	{
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(equipe);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public void remover(Equipe equipe) {
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		equipe = em.find(Equipe.class,equipe.getId());
+		em.remove(equipe);
+		em.getTransaction().commit();
+		em.close();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Equipe> getEquipes() {
@@ -39,11 +56,10 @@ public class EquipeService {
 		return equipes;
 	}
 	
-	public Equipe getEquipeByNome(String nome) {
+	public Equipe getEquipeByID(int id) {
 		
 		EntityManager em = emf.createEntityManager();
-		
-		Equipe equip = em.find(Equipe.class,nome);
+		Equipe equip = em.find(Equipe.class,id);
 		em.close();
 		
 		return equip;

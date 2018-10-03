@@ -81,8 +81,8 @@ public class UsuarioMB {
 		novaEquipe.setUsuario(usuarioAtual);
 		usuarioAtual.addEquipe(novaEquipe);
 		equipeService.salvar(novaEquipe);
-		
 		novaEquipe = new Equipe();
+		
 		return "menu";
 	}
 

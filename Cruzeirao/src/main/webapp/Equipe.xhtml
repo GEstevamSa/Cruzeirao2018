@@ -15,9 +15,9 @@
     	<p:menuitem value="Voltar" url="/faces/Usuario.xhtml"  icon="ui-icon-disk" />
 	 </p:menu>
 	 
-	<p:outputLabel value="CPF: #{usuarioMB.usuarioAtual.CPF}"  />
+	<p:outputLabel value="CPF: #{equipeMB.usuarioAtual.CPF}"  />
 	<br/>
-	<p:outputLabel value="Nome: #{usuarioMB.usuarioAtual.nome}"  />
+	<p:outputLabel value="Nome: #{equipeMB.usuarioAtual.nome}"  />
 
 	<h2>
 		<strong>Cadastro de Equipe</strong>
@@ -30,28 +30,36 @@
 		<h:panelGrid columns="2" cellpadding="5">
 			
 			<p:outputLabel value="Nome Equipe: " />
-			<p:inputText value="#{usuarioMB.novaEquipe.nome}" />
+			<p:inputText value="#{equipeMB.novaEquipe.nome}" />
 
 			<p:outputLabel for="popup" value="Data Fundação: " />
-			<p:calendar id="popup" value="#{usuarioMB.novaEquipe.dataFundacao}" />
+			<p:calendar id="popup" value="#{equipeMB.novaEquipe.dataFundacao}" />
 
 			<p:outputLabel value="Cidade: " />
-			<p:inputText value="#{usuarioMB.novaEquipe.cidade}"/>
+			<p:inputText value="#{equipeMB.novaEquipe.cidade}"/>
 
 		</h:panelGrid>
 
 
-		<p:commandButton action="#{usuarioMB.salvarEquipe()}" value="Salvar" update=":formEquipe" />
+		<p:commandButton action="#{equipeMB.salvar()}" value="Salvar" update=":formEquipe" />
 		
 		
 
 		<h3>Equipes Cadastradas</h3>
 
-		<p:dataTable var="equip" value="#{usuarioMB.usuarioAtual.equipes}">
+		<p:dataTable var="equip" value="#{equipeMB.equipes}"  id="Equipe" editable="true" >
 		
+		<p:ajax event="rowEdit" listener="#{equipeMB.alterar}" update="Equipe" />
 
+			<p:column colspan="2" headerText="Id" >
+				<p:outputLabel value="#{equip.id}" />
+			</p:column>
+			
 			<p:column colspan="2" headerText="Nome Equipe">
-				<p:outputLabel value="#{equip.nome}" />
+			<p:cellEditor>
+			  <f:facet name="output"><p:outputLabel value="#{equip.nome}" /></f:facet>
+			  <f:facet name="input"><p:inputText value="#{equip.nome}" style="width:100%" id="nome" /></f:facet>
+			  </p:cellEditor>
 			</p:column>
 
 			<h:outputText value="Popup:" />
@@ -62,19 +70,20 @@
 			</p:column>
 
 			<p:column colspan="2" headerText="Cidade">
-				<p:outputLabel value="#{equip.cidade}" />
+			<p:cellEditor>
+				  <f:facet name="output"><p:outputLabel value="#{equip.cidade}" /></f:facet>
+			      <f:facet name="input"><p:inputText value="#{equip.cidade}" style="width:100%" id="Cidade" /></f:facet>
+			</p:cellEditor>
 			</p:column>
 			
-			<p:column colspan="2">
-			<h:form>
-		    <p:growl id="messages" />
-		 
-		    <p:splitButton value="Atualizar" actionListener="#{equipe.atualizar}" update="messages" icon="ui-icon-arrowrefresh-1-w">
-		        <p:menuitem value="Deletar" actionListener="#{equipe.deletar}" ajax="false" icon="ui-icon-close" />
-		        <p:separator />
-		    </p:splitButton>
-			</h:form>
-			</p:column>
+			<p:column style="width:32px">
+           		<p:rowEditor />
+           		
+           		<p:commandLink 
+           		id="deletar" actionListener="#{equipeMB.deletar(equip)}" 
+           		styleClass="ui-icon ui-icon-trash" style="text-align:center" 
+           		update="Equipe"/>
+       	   	</p:column>
 			
 		</p:dataTable>
 	</h:form>
