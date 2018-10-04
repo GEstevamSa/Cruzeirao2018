@@ -74,17 +74,16 @@
 			
 			<h:outputText value="Popup:" />
 			<p:column colspan="2" headerText="Data Nasc.">
-			<f:facet name="Data Nasc.">
-				<h:outputText value="#{usu.dataNascimento}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
-			</f:facet>
+			<p:cellEditor>
+			   <f:facet name="output"><p:outputLabel value="#{usu.dataNascimento}" /></f:facet>
+			   <f:facet name="input"><p:inputText value="#{usu.dataNascimento}" style="width:100%" id="DataNasc" /></f:facet>
+			  </p:cellEditor>
 			</p:column>
 
 			<p:column colspan="3" headerText="Email">
 			  <p:cellEditor>
-			   <f:facet name="output"><p:outputLabel value="#{usu.nome}" /></f:facet>
-			   <f:facet name="input"><p:inputText value="#{usu.nome}" style="width:100%" id="Email" /></f:facet>
+			   <f:facet name="output"><p:outputLabel value="#{usu.email}" /></f:facet>
+			   <f:facet name="input"><p:inputText value="#{usu.email}" style="width:100%" id="Email" /></f:facet>
 			  </p:cellEditor>
 			</p:column>
 
@@ -111,9 +110,10 @@
 			</p:column>
 			
 			<p:column colspan="2" headerText="CPF">
-			<f:facet name="CPF">
-				<p:outputLabel value="#{usu.CPF}" />
-			</f:facet>
+			<p:cellEditor>
+			   <f:facet name="output"><p:outputLabel value="#{usu.CPF}" /></f:facet>
+			   <f:facet name="input"><p:inputText value="#{usu.CPF}" style="width:100%" id="CPF" /></f:facet>
+			  </p:cellEditor>
 			</p:column>
 			
 			<p:column colspan="2" headerText="Endereço">
@@ -135,12 +135,10 @@
 			<p:column colspan="3" headerText="Opções" >
 				<p:commandLink action="#{equipeMB.verEquipesCPF(usu)}" icon="ui-icon-disk" value="Adicionar Equipe" />
 				<br/>
-				<p:commandLink action="#{usuarioMB.verCampeonatos(usu)}" icon="ui-icon-disk" value="Adicionar Campeonato" />
+				<p:commandLink action="#{campeonatoMB.verCampeonatosCPF(usu)}" icon="ui-icon-disk" value="Adicionar Campeonato" />
 			</p:column>
 			
-
 		</p:dataTable>
-
 	</h:form>
 
 </h:body>

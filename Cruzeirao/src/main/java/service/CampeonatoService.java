@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import cruzeiro.Campeonato;
+import cruzeiro.Equipe;
 
 
 public class CampeonatoService {
@@ -28,7 +29,6 @@ public class CampeonatoService {
 		em.close();
 	}
 	
-	
 	@SuppressWarnings("unchecked")
 	public List<Campeonato> getCampeonatos() {
 		
@@ -40,28 +40,31 @@ public class CampeonatoService {
 		return campeonatos;
 	}
 	
-	
-	
-	
-	
-	
-/*	
-private ArrayList<Campeonato> campeonatos = Dados.CAMPEONATOS;
-	
-	public List<Campeonato> getCampeonatos() {
-		return campeonatos;
+	public void alterar(Campeonato campeonato) 
+	{
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(campeonato);
+		em.getTransaction().commit();
+		em.close();
 	}
 	
-	public void salvar(Campeonato campeonato) {
-		campeonatos.add(campeonato);
-	}
-	
-	public Campeonato getCampeonatoByNome(String idNome) {
-		for(int i=0; i< campeonatos.size(); i++)
-			if(idNome == campeonatos.get(i).getNome())
-				return campeonatos.get(i);
+	public void remover(Campeonato campeonato) {
 		
-		return null;
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		campeonato = em.find(Campeonato.class,campeonato.getId());
+		em.remove(campeonato);
+		em.getTransaction().commit();
+		em.close();
 	}
-*/
+	
+	public Campeonato getCampByID(int id) {
+		
+		EntityManager em = emf.createEntityManager();
+		Campeonato camp = em.find(Campeonato.class,id);
+		em.close();
+		
+		return camp;
+	}
 }

@@ -7,7 +7,10 @@ import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +21,9 @@ import org.primefaces.event.SelectEvent;
 public class Campeonato {
 	
 	@Id
+	@Column(name= "id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	private String nome;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="campeonato")
@@ -52,6 +58,14 @@ public class Campeonato {
 	public void addMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,summary,null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getNome() {

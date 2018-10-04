@@ -16,9 +16,9 @@
 	 </p:menu>
 
 	<h1>Dados do Usuario:</h1>
-	<p:outputLabel value="CPF: #{usuarioMB.usuarioAtual.CPF}"  />
+	<p:outputLabel value="CPF: #{campeonatoMB.usuarioAtual.CPF}"  />
 	<br/>
-	<p:outputLabel value="Nome: #{usuarioMB.usuarioAtual.nome}"  />
+	<p:outputLabel value="Nome: #{campeonatoMB.usuarioAtual.nome}"  />
 
 	<h2>
 		<strong>Cadastro de Campeonato</strong>
@@ -26,95 +26,103 @@
 	<h:form id= "formCampeonato">
 	
 		<h:panelGrid columns="2" cellpadding="5">
-		
-		
-		
+
 			<p:outputLabel value="Nome Campeonato: " />
-			<p:inputText value="#{usuarioMB.novoCampeonato.nome}" />
+			<p:inputText value="#{campeonatoMB.novoCampeonato.nome}" />
 
 			<p:outputLabel for="popup" value="Inicio Inscricao: " />
 			<p:calendar id="popup"
-				value="#{usuarioMB.novoCampeonato.dataInicioInscricao}" />
+				value="#{campeonatoMB.novoCampeonato.dataInicioInscricao}" />
 
 			<p:outputLabel for="popup0" value="Fim Inscricao: " />
 			<p:calendar id="popup0"
-				value="#{usuarioMB.novoCampeonato.dataFimInscricao}" />
+				value="#{campeonatoMB.novoCampeonato.dataFimInscricao}" />
 
 			<p:outputLabel for="popup1" value="Inicio Campeonato: " />
 			<p:calendar id="popup1"
-				value="#{usuarioMB.novoCampeonato.dataInicioCampeonato}" />
+				value="#{campeonatoMB.novoCampeonato.dataInicioCampeonato}" />
 
 			<p:outputLabel for="popup2" value="Fim Campeonato: " />
 			<p:calendar id="popup2"
-				value="#{usuarioMB.novoCampeonato.dataFimCampeonato}" />
+				value="#{campeonatoMB.novoCampeonato.dataFimCampeonato}" />
 
 			<p:outputLabel value="Valor taxa: " />
-			<p:inputText value="#{usuarioMB.novoCampeonato.valorTaxa}" />
+			<p:inputText value="#{campeonatoMB.novoCampeonato.valorTaxa}" />
 
 		</h:panelGrid>
 
-		<p:commandButton action="#{usuarioMB.salvarCampeonato()}" value="Salvar" update=":formCampeonato"/>
+		<p:commandButton action="#{campeonatoMB.salvar()}" value="Salvar" update=":formCampeonato"/>
 
 		<h3>Campeonatos Cadastrados</h3>
 		
-		<p:dataTable value="#{usuarioMB.usuarioAtual.campeonatos}" var="cam"
-			border="1">
-
-			<p:column colspan="4" headerText="Nome">
-				<p:outputLabel value="#{cam.nome}" />
+		<p:dataTable value="#{campeonatoMB.campeonatos}" var="cam" id="Campeonato" editable="true">
+		
+		<p:ajax event="rowEdit" listener="#{campeonatoMB.alterar}" update="Campeonato" />
+		
+			<p:column colspan="2" headerText="Id" >
+				<p:outputLabel value="#{cam.id}" />
 			</p:column>
 			
-			<h:outputText value="Data Inicio Inscricao" />
+			<p:column colspan="3" headerText="Nome">
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cam.nome}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cam.nome}" style="width:100%" id="nome" /></f:facet>
+			  	</p:cellEditor>
+			</p:column>
+			
+			<h:outputText value="popup:" />
 			<p:column colspan="2" headerText="Data Inicio Inscrição">
-				<h:outputText value="#{cam.dataInicioInscricao}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cam.dataInicioInscricao}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cam.dataInicioInscricao}" style="width:100%" id="dataInsc" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
-			<h:outputText value="Data Fim Inscricao" />
+			<h:outputText value="popup0:" />
 			<p:column colspan="2" headerText="Data Fim Inscrição">
-				<h:outputText value="#{cam.dataFimInscricao}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cam.dataFimInscricao}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cam.dataFimInscricao}" style="width:100%" id="dataFimInsc" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
-			<h:outputText value="Data Inicio Campeonato" />
+			<h:outputText value="popup1:" />
 			<p:column colspan="2" headerText="Data Inicio">
-				<h:outputText value="#{cam.dataInicioCampeonato}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cam.dataInicioCampeonato}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cam.dataInicioCampeonato}" style="width:100%" id="dataIniCam" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
-			<h:outputText value="Data Fim Campeonato" />
+			<h:outputText value="popup2:" />
 			<p:column colspan="2" headerText="Data Fim">
-				<h:outputText value="#{cam.dataFimCampeonato}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cam.dataFimCampeonato}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cam.dataFimCampeonato}" style="width:100%" id="dataFimCam" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
 			<p:column colspan="2" headerText="Taxa">
 				<span class="ui-inputgroup-addon">$</span>
-				<p:outputLabel value="#{cam.valorTaxa}" />
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cam.valorTaxa}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cam.valorTaxa}" style="width:100%" id="valortaxa" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 			
-			<p:column colspan="2">
-			<h:form>
-		    <p:growl id="messages" />
-		 
-		    <p:splitButton value="Atualizar" actionListener="#{campeonato.atualizar}" update="messages" icon="ui-icon-arrowrefresh-1-w">
-		        <p:menuitem value="Deletar" actionListener="#{campeonato.deletar}" ajax="false" icon="ui-icon-close" />
-		        <p:separator />
-		    </p:splitButton>
-			</h:form>
-			</p:column>
+			<p:column style="width:32px">
+           		<p:rowEditor />
+           		<p:commandLink 
+           		id="deletar" actionListener="#{campeonatoMB.deletar(cam)}" 
+           		styleClass="ui-icon ui-icon-trash" style="text-align:center" 
+           		update="Campeonato"/>
+       	   	</p:column>
 
 			<p:column headerText="Opções" >
 				<p:commandLink action="#{campeonatoMB.verCategorias(cam)}" value="Ver Categorias" />
-			</p:column>	
-    		
-    		</p:dataTable>
-		
-
+			</p:column>
+			
+    	</p:dataTable>
 	</h:form>
 
 </h:body>

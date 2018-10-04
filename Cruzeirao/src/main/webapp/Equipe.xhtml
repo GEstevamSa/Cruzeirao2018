@@ -15,6 +15,7 @@
     	<p:menuitem value="Voltar" url="/faces/Usuario.xhtml"  icon="ui-icon-disk" />
 	 </p:menu>
 	 
+	<h1>Dados do Usuario:</h1>
 	<p:outputLabel value="CPF: #{equipeMB.usuarioAtual.CPF}"  />
 	<br/>
 	<p:outputLabel value="Nome: #{equipeMB.usuarioAtual.nome}"  />
@@ -22,8 +23,6 @@
 	<h2>
 		<strong>Cadastro de Equipe</strong>
 	</h2>
-
-
 
 	<h:form id="formEquipe">
 
@@ -78,7 +77,6 @@
 			
 			<p:column style="width:32px">
            		<p:rowEditor />
-           		
            		<p:commandLink 
            		id="deletar" actionListener="#{equipeMB.deletar(equip)}" 
            		styleClass="ui-icon ui-icon-trash" style="text-align:center" 

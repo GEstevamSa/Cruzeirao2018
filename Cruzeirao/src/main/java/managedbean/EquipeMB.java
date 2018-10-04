@@ -22,6 +22,7 @@ public class EquipeMB {
 	private Equipe novaEquipe = new Equipe();
 	private Usuario usuarioAtual;
 	private UsuarioService usuarioService = new UsuarioService();
+	
 	public String salvar() {
 		
 	//	novaEquipe.setUsuario(usuarioAtual);
@@ -29,18 +30,19 @@ public class EquipeMB {
 		equipeService.salvar(novaEquipe);
 		novaEquipe = new Equipe();
 		
-		return "menu";
+		return "Menu";
 	}
+	
 	public void atualizar(RowEditEvent event) {
 
 		Equipe e = ((Equipe) event.getObject());
 		equipeService.alterar(e);
 	}
+	
 	public void deletar(Equipe equipe) {
 		equipeService.remover(equipe);
 		
 	}
-	
 	
 	public List <Equipe> getEquipes()
 	{
@@ -70,7 +72,6 @@ public class EquipeMB {
 	public void setEquipe(Equipe equipe) {
 		this.equipeAtual = equipe;
 	}
-	
 	
 	public Usuario getUsuarioAtual() {
 		return usuarioAtual;

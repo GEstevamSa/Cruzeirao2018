@@ -57,9 +57,6 @@ public class Equipe {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 	
-	
-	
-
 	public int getId() {
 		return id;
 	}

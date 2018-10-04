@@ -6,9 +6,14 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.primefaces.event.RowEditEvent;
+
 import cruzeiro.Campeonato;
 import cruzeiro.Categoria;
+import cruzeiro.Equipe;
+import cruzeiro.Usuario;
 import service.CampeonatoService;
+import service.UsuarioService;
 
 @ManagedBean
 @SessionScoped
@@ -16,14 +21,27 @@ public class CampeonatoMB {
 	
 	private CampeonatoService campeonatoService = new CampeonatoService();
 	private Campeonato campeonatoAtual;
-	private Categoria novaCategoria;
-	
 	private Campeonato novoCampeonato = new Campeonato();
+	private Usuario usuarioAtual;
+	private UsuarioService usuarioService = new UsuarioService();
+	
+	private Categoria novaCategoria;
 	
 	public String salvar() {
 		campeonatoService.salvar(novoCampeonato);
 		novoCampeonato = new Campeonato();
+		
 		return "menu";
+	}
+	
+	public void atualizar(RowEditEvent event) {
+
+		Campeonato c = ((Campeonato) event.getObject());
+		campeonatoService.alterar(c);
+	}
+	
+	public void deletar(Campeonato campeonato) {
+		campeonatoService.remover(campeonato);
 	}
 	
 	public List <Campeonato> getCampeonatos()
@@ -46,17 +64,7 @@ public class CampeonatoMB {
 	public void setCampeonatoAtual(Campeonato campeonatoAtual) {
 		this.campeonatoAtual = campeonatoAtual;
 	}
-	/*
-	public String verCategoriasNome(String idNome) {
-		campeonatoAtual = campeonatoService.getCampeonatoByNome(idNome);
-		return criarCategorias();
-	}
 	
-	public String verCategorias(Campeonato campeonato) {
-		campeonatoAtual = campeonatoService.getCampeonatoByNome(campeonato.getNome());
-		return criarCategorias();
-	}
-	*/
 	public String criarCategorias() {
 		novaCategoria = new Categoria();
 		return "Categoria";
@@ -77,30 +85,44 @@ public class CampeonatoMB {
 		this.novaCategoria = novacategoria;
 	}
 	
-	/*
-	private ArrayList<Campeonato> lista = new ArrayList<Campeonato>();
+
+	public Usuario getUsuarioAtual() {
+		return usuarioAtual;
+	}
 	
-	private Campeonato camp = new Campeonato();
+
+	public void setUsuarioAtual(Usuario usuarioAtual) {
+		this.usuarioAtual = usuarioAtual;
+	}
+
+	public UsuarioService getUsuarioService() {
+		return usuarioService;
+	}
+
+	public void setUsuarioService(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
+	}
+
+	public CampeonatoService getCampeonatoService() {
+		return campeonatoService;
+	}
+
+	public void setCampeonatoService(CampeonatoService campeonatoService) {
+		this.campeonatoService = campeonatoService;
+	}
 	
-	public void salvar() {
-		lista.add(camp);
-		camp = new Campeonato();
+	public String verCampeonatosCPF(Usuario usuario)
+	{
+		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
+		novoCampeonato = new Campeonato();
+		return "Campeonato";
 	}
-
-	public ArrayList<Campeonato> getLista() {
-		return lista;
+	
+	public String criarCampeonatos()
+	{	
+		novoCampeonato = new Campeonato();
+		return "Campeonato";
 	}
-
-	public void setLista(ArrayList<Campeonato> lista) {
-		this.lista = lista;
-	}
-
-	public Campeonato getCamp() {
-		return camp;
-	}
-
-	public void setCamp(Campeonato camp) {
-		this.camp = camp;
-	}
-	*/
+	
+	
 }
