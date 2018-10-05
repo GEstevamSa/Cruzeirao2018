@@ -1,18 +1,36 @@
 package cruzeiro;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 @Entity
-public class Inscricao {
+public class Inscricao implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	@Id
+	//@GeneratedValue(strategy=GenerationType.AUTO)
 	private long numero;
+	
+	@ManyToOne
+	@JoinColumn(name="id_categoria")
+	private Categoria categoria;
+	@ManyToOne
+	@JoinColumn(name="id_Equipe")
+	private Equipe equipe;
+	
 	private boolean pagamento;
 	private boolean validade;
-	private Categoria categoria;
-	private Equipe equipe = new Equipe();
 	
+
+	@Transient
 	private ArrayList<Partida> partidas = new ArrayList<Partida>();
 	
 	

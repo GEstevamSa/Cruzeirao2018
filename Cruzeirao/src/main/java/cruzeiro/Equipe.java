@@ -1,12 +1,13 @@
 package cruzeiro;
 
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,28 +15,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 import org.primefaces.event.SelectEvent;
 @Entity
-public class Equipe {
+public class Equipe implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name= "id")
+	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private String nome;
-	private Date dataFundacao;
-	private String cidade;
-	
 	@ManyToOne
 	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
-	
-	@Transient
-	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>(); 
-	@Transient
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="equipe")
 	private ArrayList<Inscricao> inscricoes = new ArrayList<Inscricao>();
+	@Temporal(TemporalType.DATE)
+	private Date dataFundacao;
+	
+	private String nome;
+	private String cidade;
 	
 	public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -97,14 +104,6 @@ public class Equipe {
 	public void setUsuario(Usuario usuarioAtual) {
 		this.usuario = usuarioAtual;
 		
-	}
-
-	public ArrayList<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(ArrayList<Usuario> usuarios) {
-		this.usuarios = usuarios;
 	}
 
 	public ArrayList<Inscricao> getInscricoes() {

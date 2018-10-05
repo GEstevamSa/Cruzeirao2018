@@ -1,19 +1,31 @@
 package cruzeiro;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 @Entity
-public class Grupo {
+public class Grupo implements Serializable{
 	
-	private String nome;
-	private Fase fase;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private int numero;
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="id_Fase")
+	private Fase fase;
+	@OneToMany(cascade=CascadeType.PERSIST , mappedBy="grupo")
 	private ArrayList<Rodada> rodadas = new ArrayList<>();
+	
+	private String nome;
 	
 	
 	public String getNome() {

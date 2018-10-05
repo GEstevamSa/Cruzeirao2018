@@ -6,9 +6,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import cruzeiro.Campeonato;
 import cruzeiro.Categoria;
 import cruzeiro.Fase;
+import cruzeiro.Usuario;
 import service.CategoriaService;
+import service.UsuarioService;
 
 @ManagedBean
 @SessionScoped
@@ -18,6 +21,10 @@ public class CategoriaMB {
 	private Categoria novaCategoria = new Categoria();
 	private Categoria categoriaAtual;
 	private Fase novaFase;
+	private Usuario usuarioAtual;
+	private UsuarioService usuarioService = new UsuarioService();
+	private Campeonato campeonatoAtual;
+	private Campeonato novoCampeonato = new Campeonato();
 	
 	public String salvar() {
 		categoriaService.salvar(novaCategoria);
@@ -76,4 +83,19 @@ public class CategoriaMB {
 	public void setNovaFase(Fase novaFase) {
 		this.novaFase = novaFase;
 	}
+	
+	public String verCampeonatosCPF(Usuario usuario)
+	{
+		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
+		novoCampeonato = new Campeonato();
+		return "Campeonato";
+	}
+	
+	public String salvarCategoria()
+	{
+		novoCampeonato.addCategorias(novaCategoria);
+		novaCategoria.setCampeonato(novoCampeonato);
+		return "Categoria";
+	}
+	
 }

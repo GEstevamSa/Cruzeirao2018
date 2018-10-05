@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 public class PartidasFutebol extends Partida{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	private ArrayList<Gol> golsMandantes = new ArrayList<>();
 	private ArrayList<Gol> golsVisitantes = new ArrayList<>();
 	private ArrayList<Gol> golsPenaltesMandantes = new ArrayList<>();

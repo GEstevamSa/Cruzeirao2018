@@ -3,27 +3,33 @@ package cruzeiro;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 import org.primefaces.event.SelectEvent;
 @Entity
 public class Fase {
 	
-	private Date dataInicio;
-	private Date dataFim;
-	private Categoria categoria;
 	@Id
 	private int numero;
-	@Transient
-	private ArrayList<Categoria> categorias = new ArrayList<Categoria>(); 
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="id_Categoria")
+	private Categoria categoria;
+	@OneToMany(cascade=CascadeType.PERSIST , mappedBy="fase")
 	private static ArrayList<Grupo> grupos = new ArrayList<>();
+	@Temporal(TemporalType.DATE)
+	private Date dataInicio;
+	@Temporal(TemporalType.DATE)
+	private Date dataFim;
 	
 	
 	public Fase() {
@@ -58,14 +64,6 @@ public class Fase {
 	}
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
-	
-	public ArrayList<Categoria> getCategoriass() {
-		return categorias;
-	}
-
-	public void setCategorias(ArrayList<Categoria> categoria) {
-		this.categorias = categoria;
 	}
 	
 	public static ArrayList<Grupo> getGrupos() {
