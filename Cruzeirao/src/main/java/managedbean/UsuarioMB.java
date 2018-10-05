@@ -67,6 +67,7 @@ public class UsuarioMB {
 	public String verEquipesCPF (Usuario usuario)
 	{
 		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
+		usuarioAtual.getEquipes();
 		return criarEquipes();
 	}
 	
@@ -79,7 +80,9 @@ public class UsuarioMB {
 	public String salvarEquipe()
 	{
 		novaEquipe.setUsuario(usuarioAtual);
-		usuarioAtual.addEquipe(novaEquipe);
+		//usuarioAtual.addEquipe(novaEquipe);
+		getUsuarioAtual().getEquipes().add(novaEquipe);
+		
 		equipeService.salvar(novaEquipe);
 		novaEquipe = new Equipe();
 		
