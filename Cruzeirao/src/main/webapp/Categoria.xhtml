@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3c.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro</title>
 </h:head>
 <h:body>
 	
@@ -14,80 +17,91 @@
 	 </p:menu>
 	 
 	 <br/>
-	 		<h1>Dados do usuario:</h1>
-			<p:outputLabel value="CPF: #{usuarioMB.usuarioAtual.CPF}"  />
-			<br/>
-			<p:outputLabel value="Nome: #{usuarioMB.usuarioAtual.nome}"  />
-	
+	 		<h1>Dados do Campeonato:</h1>
+			<p:outputLabel value="Nome: #{categoriaMB.campeonatoAtual.nome}"  />
 	<h2>
 		<strong>Quais sao suas Categorias?</strong>
 	</h2>
-	<h:form id="formcategoria">
+	<h:form id="formCategoria">
 
 		<h:panelGrid columns="2" cellpadding="5">
 
 			<p:outputLabel value="Nome: " />
-			<p:inputText value="#{campeonatoMB.novaCategoria.nome}" />
+			<p:inputText value="#{categoriaMB.novaCategoria.nome}" />
 
 			<p:outputLabel value="Nascidos a partir de: " />
-			<p:inputText value="#{campeonatoMB.novaCategoria.nascidosApartirDe}" />
+			<p:inputText value="#{categoriaMB.novaCategoria.nascidosApartirDe}" />
 
 			<p:outputLabel value="Jogadores Minimos: " />
-			<p:inputText value="#{campeonatoMB.novaCategoria.minJogadores}" />
+			<p:inputText value="#{categoriaMB.novaCategoria.minJogadores}" />
 
 			<p:outputLabel value="Jogadores Maximos: " />
-			<p:inputText value="#{campeonatoMB.novaCategoria.maxJogadores}" />
+			<p:inputText value="#{categoriaMB.novaCategoria.maxJogadores}" />
 
 			<p:outputLabel value="Sexo: " />
-			<p:inputText value="#{campeonatoMB.novaCategoria.sexo}" />
+			<p:inputText value="#{categoriaMB.novaCategoria.sexo}" />
 
 		</h:panelGrid>
 
-		<p:commandButton value="Salvar" action="#{campeonatoMB.salvarCategoria}" update=":formcategoria" />
+		<p:commandButton value="Salvar" action="#{categoriaMB.salvar()}" update=":formCategoria" />
 		
 		<h3>Categorias Cadastradas</h3>
 
-		<p:dataTable var="cat" value="#{campeonatoMB.novoCampeonato.categorias}">
-
+		<p:dataTable var="cat" value="#{categoriaMB.categorias}" id="Categoria" editable="true">
+		
+		<p:ajax event="rowEdit" listener="#{categoriaMB.alterar}" update="Categoria" />
+			
 			<p:column colspan="2" headerText="Nome">
-				<p:outputLabel value="#{cat.nome}" />
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cat.nome}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cat.nome}" style="width:100%" id="nome" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
 			<p:column colspan="2" headerText="Nascido">
-				<p:outputLabel value="#{cat.nascidosApartirDe}" />
+			<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cat.nascidosApartirDe}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cat.nascidosApartirDe}" style="width:100%" id="nascApartirDe" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
 			<p:column colspan="2" headerText="Jogadores Minimos">
-				<p:outputLabel value="#{cat.minJogadores}" />
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cat.minJogadores}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{ccat.minJogadores}" style="width:100%" id="minJogadores" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
 			<p:column colspan="2" headerText="Jogadores Maximos">
-				<p:outputLabel value="#{cat.maxJogadores}" />
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cat.maxJogadores}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cat.maxJogadores}" style="width:100%" id="maxJOgadores" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
 			<p:column colspan="2" headerText="Sexo">
-				<p:outputLabel value="#{cat.sexo}" />
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{cat.sexo}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{cat.sexo}" style="width:100%" id="Sexo" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 			
-			<p:column colspan="2">
-			<h:form>
-		    <p:growl id="messages" />
-		 
-		    <p:splitButton value="Atualizar" actionListener="#{categoria.atualizar}" update="messages" icon="ui-icon-arrowrefresh-1-w">
-		        <p:menuitem value="Deletar" actionListener="#{categoria.deletar}" ajax="false" icon="ui-icon-close" />
-		        <p:separator />
-		    </p:splitButton>
-			</h:form>
-			</p:column>
+			<p:column style="width:32px">
+           		<p:rowEditor />
+           		<p:commandLink 
+           		id="deletar" actionListener="#{categoriaMB.deletar(cat)}" 
+           		styleClass="ui-icon ui-icon-trash" style="text-align:center" 
+           		update="Categoria"/>
+       	   	</p:column>
 			
-			<p:column headerText="OpÃ§Ãµes" >
-				<p:commandLink action="#{categoriaMB.verFases(cat)}" value="Ver Fases" />
+			<p:column headerText="Opções" >
+				<p:commandLink action="#{faseMB.verFases(cat)}" value="Ver Fases" />
 			</p:column>
 
 		</p:dataTable>
 		
 		<p:menu>
-    		<p:menuitem value="Fazer InscriÃ§Ã£o" url="/faces/Inscricao.xhtml"  icon="ui-icon-disk" /> 
+    		<p:menuitem value="Fazer Inscrição" url="/faces/Inscricao.xhtml"  icon="ui-icon-disk" /> 
 		</p:menu>
 
 	</h:form>

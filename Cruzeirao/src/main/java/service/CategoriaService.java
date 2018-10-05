@@ -1,6 +1,5 @@
 package service;
 
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,9 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import cruzeiro.Campeonato;
 import cruzeiro.Categoria;
-
-
 
 public class CategoriaService {
 	
@@ -29,7 +27,6 @@ private EntityManagerFactory emf;
 		em.close();
 	}
 	
-	
 	@SuppressWarnings("unchecked")
 	public List<Categoria> getCategorias() {
 		
@@ -41,27 +38,32 @@ private EntityManagerFactory emf;
 		return categorias;
 	}
 	
-	
-	
-	
-	
-/*	
-private ArrayList<Categoria> categorias = Dados.CATEGORIAS;
-	
-	public List<Categoria> getCategorias() {
-		return categorias;
+	public void alterar(Categoria categoria) 
+	{
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(categoria);
+		em.getTransaction().commit();
+		em.close();
 	}
 	
-	public void salvar(Categoria categoria) {
-		categorias.add(categoria);
-	}
-	
-	public Categoria getCategoriaByNome(String idNome) {
-		for(int i=0; i< categorias.size(); i++)
-			if(idNome == categorias.get(i).getNome())
-				return categorias.get(i);
+	public void remover(Categoria categoria) {
 		
-		return null;
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		categoria = em.find(Categoria.class,categoria.getNome());
+		em.remove(categoria);
+		em.getTransaction().commit();
+		em.close();
 	}
-	*/
+	
+	public Categoria getCatByID(int id) {
+		
+		EntityManager em = emf.createEntityManager();
+		Categoria cat = em.find(Categoria.class,id);
+		em.close();
+		
+		return cat;
+	}
+
 }

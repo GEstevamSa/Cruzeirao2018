@@ -6,7 +6,10 @@ import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,9 +23,11 @@ import org.primefaces.event.SelectEvent;
 public class Fase {
 	
 	@Id
+	@Column(name= "id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int numero;
 	@ManyToOne
-	@JoinColumn(name="id_Categoria")
+	@JoinColumn(name="idCategoria")
 	private Categoria categoria;
 	@OneToMany(cascade=CascadeType.PERSIST , mappedBy="fase")
 	private static ArrayList<Grupo> grupos = new ArrayList<>();
@@ -31,12 +36,6 @@ public class Fase {
 	@Temporal(TemporalType.DATE)
 	private Date dataFim;
 	
-	
-	public Fase() {
-		super();
-	}
-	
-	
 	public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -44,10 +43,10 @@ public class Fase {
         		format.format(event.getObject())));
     }
 	
-	
 	public Date getDataInicio() {
 		return dataInicio;
 	}
+	
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
@@ -55,6 +54,7 @@ public class Fase {
 	public Date getDataFim() {
 		return dataFim;
 	}
+	
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
 	}
@@ -62,6 +62,7 @@ public class Fase {
 	public Categoria getCategoria() {
 		return categoria;
 	}
+	
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
@@ -77,6 +78,7 @@ public class Fase {
 	public int getNumero() {
 		return numero;
 	}
+	
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}

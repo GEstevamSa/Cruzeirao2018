@@ -10,7 +10,6 @@ import org.primefaces.event.RowEditEvent;
 
 import cruzeiro.Campeonato;
 import cruzeiro.Categoria;
-import cruzeiro.Equipe;
 import cruzeiro.Usuario;
 import service.CampeonatoService;
 import service.UsuarioService;
@@ -28,9 +27,9 @@ public class CampeonatoMB {
 	private Categoria novaCategoria;
 	
 	public String salvar() {
+		
 		campeonatoService.salvar(novoCampeonato);
 		novoCampeonato = new Campeonato();
-		
 		return "menu";
 	}
 	
@@ -65,11 +64,6 @@ public class CampeonatoMB {
 		this.campeonatoAtual = campeonatoAtual;
 	}
 	
-	public String criarCategorias() {
-		novaCategoria = new Categoria();
-		return "Categoria";
-	}
-	
 	public String salvarCategoria()
 	{
 		novoCampeonato.addCategorias(novaCategoria);
@@ -84,13 +78,11 @@ public class CampeonatoMB {
 	public void setNovaCategoria(Categoria novacategoria) {
 		this.novaCategoria = novacategoria;
 	}
-	
 
 	public Usuario getUsuarioAtual() {
 		return usuarioAtual;
 	}
 	
-
 	public void setUsuarioAtual(Usuario usuarioAtual) {
 		this.usuarioAtual = usuarioAtual;
 	}
@@ -117,13 +109,6 @@ public class CampeonatoMB {
 		novoCampeonato = new Campeonato();
 		return "Campeonato";
 	}
-	
-	public String verCategorias(Campeonato campeonato) {
-		campeonatoAtual = (Campeonato) campeonatoService.getCampByID(campeonato.getId());
-		return criarCategorias();
-	}
-	
-	
 	
 	public String criarCampeonatos()
 	{	

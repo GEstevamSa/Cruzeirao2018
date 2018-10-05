@@ -25,8 +25,8 @@ public class EquipeMB {
 	
 	public String salvar() {
 		
-	//	novaEquipe.setUsuario(usuarioAtual);
-	//	usuarioAtual.addEquipe(novaEquipe);
+		novaEquipe.setUsuario(usuarioAtual);
+		usuarioAtual.addEquipe(novaEquipe);
 		equipeService.salvar(novaEquipe);
 		novaEquipe = new Equipe();
 		

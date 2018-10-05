@@ -23,10 +23,7 @@ import javax.persistence.TemporalType;
 import org.primefaces.event.SelectEvent;
 @Entity
 public class Equipe implements Serializable{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id

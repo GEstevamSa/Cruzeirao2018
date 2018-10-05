@@ -1,67 +1,80 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3c.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro</title>
 </h:head>
-
 <h:body>
 
 	<p:menu>
     	<p:menuitem value="Voltar" url="/faces/Categoria.xhtml"  icon="ui-icon-disk" />
 	 </p:menu>
 	 
+	 <br/>
+	 <h1>Dados da Categoria:</h1>
+	 <p:outputLabel value="Nome: #{faseMB.categoriaAtual.nome}"  />
+	 
 	<h1>
 		<strong>Fase</strong>
 	</h1>
 	<h:form id="formfase">
 		<h:panelGrid columns="2" cellpadding="5">
-
+			
+			<p:outputLabel value="Numero: " />
+			<p:inputText value="#{faseMB.novaFase.numero}" />
+			
 			<p:outputLabel for="popup" value="Inicio: " />
-			<p:calendar id="popup"
-				value="#{faseMB.fase.dataInicio}" />
+			<p:calendar id="popup" value="#{faseMB.novaFase.dataInicio}" />
 
 			<p:outputLabel for="popup0" value="Fim: " />
-			<p:calendar id="popup0"
-				value="#{faseMB.fase.dataFim}" />
-				
-			<p:outputLabel value="Numero: " />
-			<p:inputText value="#{faseMB.fase.numero}" />	        					
-
+			<p:calendar id="popup0" value="#{faseMB.novaFase.dataFim}" />
+			
 		</h:panelGrid>
 
-		<p:commandButton value="Salvar" action="#{faseMB.salvar}" update=":formfase" />
+		<p:commandButton value="Salvar" action="#{faseMB.salvar()}" update=":formfase" />
 		
-		<h3>
-		
-		
-		
-		<strong>Cadastradas</strong>
-		
-		</h3>
+		<h3>Fases Cadastradas</h3>
 
-		<p:dataTable var="fas" value="#{faseMB.lista}">
-
+		<p:dataTable var="fas" value="#{faseMB.fases}" id="Fase" editable="true">
+		
+		<p:ajax event="rowEdit" listener="#{faseMB.alterar}" update="Fase" />
+		
 			<h:outputText value="Data Inicio Inscricao" />
-			<p:column colspan="2" headerText="Data Inicio InscriÃ§Ã£o">
-				<h:outputText value="#{fas.dataInicio}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
+			<p:column colspan="2" headerText="Data Inicio Inscrição">
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{fas.dataInicio}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{fas.dataInicio}" style="width:100%" id="dataInicio" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 
 			<h:outputText value="Data Fim Inscricao" />
-			<p:column colspan="2" headerText="Data Fim InscriÃ§Ã£o">
-				<h:outputText value="#{fas.dataFim}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
+			<p:column colspan="2" headerText="Data Fim Inscrição">
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{fas.dataFim}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{fas.dataFim}" style="width:100%" id="dataFim" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
 			
 			<p:column colspan="2" headerText="Numero:">
-				<p:outputLabel value="#{fas.numero}" />
+				<p:cellEditor>
+			  		<f:facet name="output"><p:outputLabel value="#{fas.numero}" /></f:facet>
+			  		<f:facet name="input"><p:inputText value="#{fas.numero}" style="width:100%" id="fase" /></f:facet>
+			  	</p:cellEditor>
 			</p:column>
+			
+			<p:column style="width:32px">
+           		<p:rowEditor />
+           		<p:commandLink 
+           		id="deletar" actionListener="#{faseMB.deletar(fas)}" 
+           		styleClass="ui-icon ui-icon-trash" style="text-align:center" 
+           		update="Fase"/>
+       	   	</p:column>
 
 		</p:dataTable>
 		

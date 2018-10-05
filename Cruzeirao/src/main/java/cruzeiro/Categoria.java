@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +19,10 @@ import javax.persistence.OneToMany;
 @Entity
 public class Categoria implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name= "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@OneToMany(cascade=CascadeType.PERSIST , mappedBy="categoria")
@@ -31,7 +30,7 @@ public class Categoria implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idCampeonato")
 	private Campeonato campeonato;
-	@OneToMany(cascade=CascadeType.PERSIST , mappedBy="categoria")
+	@OneToMany(cascade=CascadeType.ALL , mappedBy="categoria")
 	private ArrayList<Fase> fases = new ArrayList<Fase>();
 	
 	private String nome;
@@ -39,19 +38,6 @@ public class Categoria implements Serializable{
 	private int minJogadores;
 	private int maxJogadores;
 	private String sexo;
-	
-	public void atualizar(ActionEvent actionEvent) {
-		addMessage("Valor Atualizado com sucesso");
-	}
-	
-	public void deletar(ActionEvent actionEvent) {
-		addMessage("Valor Deletado com sucesso");
-	}
-	
-	public void addMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,summary,null);
-		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
 
 	public String getNome() {
 		return nome;
@@ -121,5 +107,15 @@ public class Categoria implements Serializable{
 	{
 		fases.add(fase);
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 	
 }
