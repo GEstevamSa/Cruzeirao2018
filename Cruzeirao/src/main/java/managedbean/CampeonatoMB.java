@@ -118,6 +118,13 @@ public class CampeonatoMB {
 		return "Campeonato";
 	}
 	
+	public String verCategorias(Campeonato campeonato) {
+		campeonatoAtual = (Campeonato) campeonatoService.getCampByID(campeonato.getId());
+		return criarCategorias();
+	}
+	
+	
+	
 	public String criarCampeonatos()
 	{	
 		novoCampeonato = new Campeonato();
