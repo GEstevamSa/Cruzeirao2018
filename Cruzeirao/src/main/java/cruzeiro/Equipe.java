@@ -30,9 +30,13 @@ public class Equipe implements Serializable{
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
+	
 	@ManyToOne
 	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
+	
+	
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="equipe")
 	private ArrayList<Inscricao> inscricoes = new ArrayList<Inscricao>();
 	@Temporal(TemporalType.DATE)
@@ -110,4 +114,12 @@ public class Equipe implements Serializable{
 	public void setInscricoes(ArrayList<Inscricao> inscricoes) {
 		this.inscricoes = inscricoes;
 	}
+
+	@Override
+	public String toString() {
+		return "Equipe [id=" + id + ", usuario=" + usuario + ", inscricoes=" + inscricoes + ", dataFundacao="
+				+ dataFundacao + ", nome=" + nome + ", cidade=" + cidade + "]";
+	}
+	
+	
 }

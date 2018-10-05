@@ -67,14 +67,14 @@ public class UsuarioMB {
 	public String verEquipesCPF (Usuario usuario)
 	{
 		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
-		usuarioAtual.getEquipes();
-		return criarEquipes();
+		novaEquipe = new Equipe();
+		return "Equipe";
 	}
 	
 	public String verCampeonatos (Usuario usuario) 
 	{
 		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
-	return criarCampeonatos();
+		return criarCampeonatos();
 	}
 	
 	public String salvarEquipe()

@@ -5,11 +5,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import cruzeiro.Campeonato;
+import cruzeiro.Equipe;
 import cruzeiro.Usuario;
 
 public class UsuarioService {
 	
 	private EntityManagerFactory emf;
+	private EntityManager        em;
+	
 
 	public UsuarioService(){
 		emf = Persistence.createEntityManagerFactory("Cruzeirao");
@@ -17,7 +22,7 @@ public class UsuarioService {
 	
 	public void salvar(Usuario usuario )
 	{
-		EntityManager em = emf.createEntityManager();
+		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(usuario);
 		em.getTransaction().commit();
@@ -26,7 +31,7 @@ public class UsuarioService {
 	
 	public void alterar(Usuario usuario) 
 	{
-		EntityManager em = emf.createEntityManager();
+		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.merge(usuario);
 		em.getTransaction().commit();
@@ -35,7 +40,7 @@ public class UsuarioService {
 	
 	public void remover(Usuario usuario) {
 		
-		EntityManager em = emf.createEntityManager();
+		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		usuario = em.find(Usuario.class,usuario.getCPF());
 		em.remove(usuario);
@@ -58,7 +63,25 @@ public class UsuarioService {
 		
 		EntityManager em = emf.createEntityManager();
 		Usuario user = em.find(Usuario.class,cpf);
+		for(Equipe e : user.getEquipes())
+			System.out.println(e);
 		em.close();
 		return user;
+	}
+	
+	
+public Usuario getUsuarioCamp(String cpf) {
+		
+		EntityManager em = emf.createEntityManager();
+		Usuario user = em.find(Usuario.class,cpf);
+		for(Campeonato c : user.getCampeonatos())
+			System.out.println(c);
+		em.close();
+		return user;
+	}
+
+	public void closeEM() {
+		
+		em.close();
 	}
 }

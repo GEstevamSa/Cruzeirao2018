@@ -105,7 +105,7 @@ public class CampeonatoMB {
 	
 	public String verCampeonatosCPF(Usuario usuario)
 	{
-		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
+		usuarioAtual = usuarioService.getUsuarioCamp(usuario.getCPF());
 		novoCampeonato = new Campeonato();
 		return "Campeonato";
 	}
