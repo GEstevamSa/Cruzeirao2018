@@ -103,13 +103,14 @@ public class CampeonatoMB {
 		this.campeonatoService = campeonatoService;
 	}
 	
+	/*
 	public String verCampeonatosCPF(Usuario usuario)
 	{
 		usuarioAtual = usuarioService.getUsuarioCamp(usuario.getCPF());
 		novoCampeonato = new Campeonato();
 		return "Campeonato";
 	}
-	
+	*/
 	public String criarCampeonatos()
 	{	
 		novoCampeonato = new Campeonato();

@@ -27,7 +27,7 @@ public class EquipeMB {
 		
 		novaEquipe.setUsuario(usuarioAtual);
 		usuarioAtual.addEquipe(novaEquipe);
-		equipeService.salvar(novaEquipe);
+		equipeService.save(novaEquipe);
 		novaEquipe = new Equipe();
 		
 		return "Menu";
@@ -36,17 +36,17 @@ public class EquipeMB {
 	public void atualizar(RowEditEvent event) {
 
 		Equipe e = ((Equipe) event.getObject());
-		equipeService.alterar(e);
+		equipeService.save(e);
 	}
 	
 	public void deletar(Equipe equipe) {
-		equipeService.remover(equipe);
+		equipeService.remove(equipe);
 		
 	}
 	
 	public List <Equipe> getEquipes()
 	{
-		return equipeService.getEquipes();
+		return equipeService.getAll(Equipe.class);
 	}
 	
 	public Equipe getEquipe() {
@@ -83,12 +83,12 @@ public class EquipeMB {
 	
 	public List <Usuario> getUsuarios()
 	{
-		return usuarioService.getUsuarios();
+		return usuarioService.getAll(Usuario.class);
 	}
 	
 	public String verEquipesCPF (Usuario usuario)
 	{
-		usuarioAtual = usuarioService.getUsuarioIdbyCPF(usuario.getCPF());
+		usuarioAtual = usuarioService.getById(Usuario.class,usuario.getCPF());
 		return criarEquipes();
 	}
 	

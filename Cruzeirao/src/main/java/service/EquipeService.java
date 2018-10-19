@@ -10,7 +10,9 @@ import javax.persistence.Query;
 import cruzeiro.Equipe;
 
 
-public class EquipeService {
+public class EquipeService extends DAOImpl<Equipe, Integer> {
+	
+	/*
 	private EntityManagerFactory emf;
 	
 	public EquipeService(){
@@ -64,4 +66,5 @@ public class EquipeService {
 		
 		return equip;
 	}
+	*/
 }

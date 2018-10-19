@@ -10,55 +10,9 @@ import cruzeiro.Campeonato;
 import cruzeiro.Equipe;
 import cruzeiro.Usuario;
 
-public class UsuarioService {
+public class UsuarioService extends DAOImpl<Usuario, String>{
 	
-	private EntityManagerFactory emf;
-	private EntityManager        em;
-	
-
-	public UsuarioService(){
-		emf = Persistence.createEntityManagerFactory("Cruzeirao");
-	}
-	
-	public void salvar(Usuario usuario )
-	{
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(usuario);
-		em.getTransaction().commit();
-		em.close();
-	}
-	
-	public void alterar(Usuario usuario) 
-	{
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.merge(usuario);
-		em.getTransaction().commit();
-		em.close();
-	}
-	
-	public void remover(Usuario usuario) {
-		
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		usuario = em.find(Usuario.class,usuario.getCPF());
-		em.remove(usuario);
-		em.getTransaction().commit();
-		em.close();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Usuario> getUsuarios() {
-		
-		List <Usuario> usuarios;
-		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("Select a From Usuario a ");
-		usuarios = q.getResultList();
-		em.close();
-		return usuarios;
-	}
-	
+	/*
 	public Usuario getUsuarioIdbyCPF(String cpf) {
 		
 		EntityManager em = emf.createEntityManager();
@@ -84,4 +38,5 @@ public Usuario getUsuarioCamp(String cpf) {
 		
 		em.close();
 	}
+	*/
 }
