@@ -28,7 +28,7 @@ public class CampeonatoMB {
 	
 	public String salvar() {
 		
-		campeonatoService.salvar(novoCampeonato);
+		campeonatoService.save(novoCampeonato);
 		novoCampeonato = new Campeonato();
 		return "menu";
 	}
@@ -36,16 +36,16 @@ public class CampeonatoMB {
 	public void atualizar(RowEditEvent event) {
 
 		Campeonato c = ((Campeonato) event.getObject());
-		campeonatoService.alterar(c);
+		campeonatoService.save(c);
 	}
 	
 	public void deletar(Campeonato campeonato) {
-		campeonatoService.remover(campeonato);
+		campeonatoService.remove(campeonato);
 	}
 	
 	public List <Campeonato> getCampeonatos()
 	{
-		return campeonatoService.getCampeonatos();
+		return campeonatoService.getAll(Campeonato.class);
 	}
 
 	public Campeonato getNovoCampeonato() {
@@ -103,14 +103,14 @@ public class CampeonatoMB {
 		this.campeonatoService = campeonatoService;
 	}
 	
-	/*
+	
 	public String verCampeonatosCPF(Usuario usuario)
 	{
-		usuarioAtual = usuarioService.getUsuarioCamp(usuario.getCPF());
+		usuarioAtual = usuarioService.getById(Usuario.class,usuario.getCPF());
 		novoCampeonato = new Campeonato();
 		return "Campeonato";
 	}
-	*/
+	
 	public String criarCampeonatos()
 	{	
 		novoCampeonato = new Campeonato();

@@ -49,7 +49,7 @@
 
 		<p:dataTable var="cat" value="#{categoriaMB.categorias}" id="Categoria" editable="true">
 		
-		<p:ajax event="rowEdit" listener="#{categoriaMB.alterar}" update="Categoria" />
+		<p:ajax event="rowEdit" listener="#{categoriaMB.atualizar}" update="Categoria" />
 			
 			<p:column colspan="2" headerText="Nome">
 				<p:cellEditor>

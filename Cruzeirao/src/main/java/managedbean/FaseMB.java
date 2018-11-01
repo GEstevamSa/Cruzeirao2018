@@ -1,15 +1,9 @@
 package managedbean;
 
-import java.io.NotActiveException;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 import org.primefaces.event.RowEditEvent;
-
-import cruzeiro.Campeonato;
 import cruzeiro.Categoria;
 import cruzeiro.Fase;
 import cruzeiro.Grupo;
@@ -30,7 +24,7 @@ public class FaseMB {
 			
 		public String salvar() {
 			
-			faseService.salvar(novaFase);
+			faseService.save(novaFase);
 			novaFase = new Fase();
 			return "fase";
 		}
@@ -38,15 +32,15 @@ public class FaseMB {
 		public void atualizar(RowEditEvent event) {
 
 			Fase fas = ((Fase) event.getObject());
-			faseService.alterar(fas);
+			faseService.save(fas);
 		}
 		
 		public void deletar(Fase fase) {
-			faseService.remover(fase);
+			faseService.remove(fase);
 		}
 		
 		public List<Fase> getFases(){
-			return faseService.getFases();
+			return faseService.getAll(Fase.class);
 		}
 
 		public CategoriaService getCategoriaService() {
@@ -115,7 +109,7 @@ public class FaseMB {
 		
 		public String verFases(Categoria categoria) {
 			
-			categoriaAtual = categoriaService.getCatByID(categoria.getId());
+			categoriaAtual = categoriaService.getById(Categoria.class,categoria.getId());
 			novaFase = new Fase();
 			
 			return "Fase";

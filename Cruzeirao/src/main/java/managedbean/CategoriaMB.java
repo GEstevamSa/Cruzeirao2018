@@ -10,10 +10,8 @@ import org.primefaces.event.RowEditEvent;
 import cruzeiro.Campeonato;
 import cruzeiro.Categoria;
 import cruzeiro.Fase;
-import cruzeiro.Usuario;
 import service.CampeonatoService;
 import service.CategoriaService;
-import service.UsuarioService;
 
 @ManagedBean
 @SessionScoped
@@ -29,7 +27,7 @@ public class CategoriaMB {
 	
 	public String salvar() {
 		
-		categoriaService.salvar(novaCategoria);
+		categoriaService.save(novaCategoria);
 		novaCategoria = new Categoria();
 		return "menu";
 	}
@@ -37,15 +35,15 @@ public class CategoriaMB {
 	public void atualizar(RowEditEvent event) {
 
 		Categoria cat = ((Categoria) event.getObject());
-		categoriaService.alterar(cat);
+		categoriaService.save(cat);
 	}
 	
 	public void deletar(Categoria categoria) {
-		categoriaService.remover(categoria);
+		categoriaService.remove(categoria);
 	}
 
 	public List<Categoria> getCategorias(){
-		return categoriaService.getCategorias();
+		return categoriaService.getAll(Categoria.class);
 	}
 
 	public Categoria getNovaCategoria() {
@@ -100,7 +98,7 @@ public class CategoriaMB {
 	}
 	
 	public String verCategorias(Campeonato campeonato) {
-		campeonatoAtual = campeonatoService.getCampByID(campeonato.getId());
+		campeonatoAtual = campeonatoService.getById(Campeonato.class,campeonato.getId());
 		novaCategoria = new Categoria();
 		
 		return "Categoria";

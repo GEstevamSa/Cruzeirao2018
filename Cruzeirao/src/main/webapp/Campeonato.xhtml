@@ -57,7 +57,7 @@
 		
 		<p:dataTable value="#{campeonatoMB.campeonatos}" var="cam" id="Campeonato" editable="true">
 		
-		<p:ajax event="rowEdit" listener="#{campeonatoMB.alterar}" update="Campeonato" />
+		<p:ajax event="rowEdit" listener="#{campeonatoMB.atualizar}" update="Campeonato" />
 		
 			<p:column colspan="2" headerText="Id" >
 				<p:outputLabel value="#{cam.id}" />

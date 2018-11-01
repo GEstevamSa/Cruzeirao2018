@@ -43,7 +43,7 @@
 
 		<p:dataTable var="fas" value="#{faseMB.fases}" id="Fase" editable="true">
 		
-		<p:ajax event="rowEdit" listener="#{faseMB.alterar}" update="Fase" />
+		<p:ajax event="rowEdit" listener="#{faseMB.atualizar}" update="Fase" />
 		
 			<h:outputText value="Data Inicio Inscricao" />
 			<p:column colspan="2" headerText="Data Inicio Inscrição">

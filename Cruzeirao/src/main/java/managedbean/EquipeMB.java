@@ -30,7 +30,7 @@ public class EquipeMB {
 		equipeService.save(novaEquipe);
 		novaEquipe = new Equipe();
 		
-		return "Menu";
+		return "Equipe";
 	}
 	
 	public void atualizar(RowEditEvent event) {
