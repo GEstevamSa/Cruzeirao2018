@@ -9,7 +9,6 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.event.RowEditEvent;
 
 import cruzeiro.Campeonato;
-import cruzeiro.Categoria;
 import cruzeiro.Usuario;
 import service.CampeonatoService;
 import service.UsuarioService;
@@ -19,18 +18,22 @@ import service.UsuarioService;
 public class CampeonatoMB {
 	
 	private CampeonatoService campeonatoService = new CampeonatoService();
+	
 	private Campeonato campeonatoAtual;
 	private Campeonato novoCampeonato = new Campeonato();
+	
 	private Usuario usuarioAtual;
 	private UsuarioService usuarioService = new UsuarioService();
-	
-	private Categoria novaCategoria;
+
 	
 	public String salvar() {
-		
+		novoCampeonato.setUsuario(usuarioAtual);
+		usuarioAtual.addCampeonatos(novoCampeonato);
 		campeonatoService.save(novoCampeonato);
 		novoCampeonato = new Campeonato();
-		return "menu";
+		usuarioService.closeEntityManager();
+		campeonatoService.closeEntityManager();
+		return "Campeonato";
 	}
 	
 	public void atualizar(RowEditEvent event) {
@@ -63,21 +66,6 @@ public class CampeonatoMB {
 	public void setCampeonatoAtual(Campeonato campeonatoAtual) {
 		this.campeonatoAtual = campeonatoAtual;
 	}
-	
-	public String salvarCategoria()
-	{
-		novoCampeonato.addCategorias(novaCategoria);
-		novaCategoria.setCampeonato(novoCampeonato);
-		return "Categoria";
-	}
-
-	public Categoria getNovaCategoria() {
-		return novaCategoria;
-	}
-
-	public void setNovaCategoria(Categoria novacategoria) {
-		this.novaCategoria = novacategoria;
-	}
 
 	public Usuario getUsuarioAtual() {
 		return usuarioAtual;
@@ -94,6 +82,10 @@ public class CampeonatoMB {
 	public void setUsuarioService(UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
 	}
+	
+	public List<Usuario> getUsuarios(){
+		return usuarioService.getAll(Usuario.class);
+	}
 
 	public CampeonatoService getCampeonatoService() {
 		return campeonatoService;
@@ -107,8 +99,7 @@ public class CampeonatoMB {
 	public String verCampeonatosCPF(Usuario usuario)
 	{
 		usuarioAtual = usuarioService.getById(Usuario.class,usuario.getCPF());
-		novoCampeonato = new Campeonato();
-		return "Campeonato";
+		return criarCampeonatos();
 	}
 	
 	public String criarCampeonatos()

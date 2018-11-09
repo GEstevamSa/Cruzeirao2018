@@ -55,7 +55,7 @@
 
 		<h3>Campeonatos Cadastrados</h3>
 		
-		<p:dataTable value="#{campeonatoMB.campeonatos}" var="cam" id="Campeonato" editable="true">
+		<p:dataTable value="#{campeonatoMB.usuarioAtual.campeonatos}" var="cam" id="Campeonato" editable="true">
 		
 		<p:ajax event="rowEdit" listener="#{campeonatoMB.atualizar}" update="Campeonato" />
 		

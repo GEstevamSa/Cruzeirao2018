@@ -29,7 +29,8 @@ public class EquipeMB {
 		usuarioAtual.addEquipe(novaEquipe);
 		equipeService.save(novaEquipe);
 		novaEquipe = new Equipe();
-		
+		usuarioService.closeEntityManager();
+		equipeService.closeEntityManager();
 		return "Equipe";
 	}
 	
