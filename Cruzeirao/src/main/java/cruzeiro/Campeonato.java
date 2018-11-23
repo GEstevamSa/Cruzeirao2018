@@ -28,9 +28,8 @@ public class Campeonato {
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="campeonato")
 	private ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-	
+
 	private Date dataInicioInscricao;
 	private Date dataFimInscricao;
 	private Date dataInicioCampeonato;

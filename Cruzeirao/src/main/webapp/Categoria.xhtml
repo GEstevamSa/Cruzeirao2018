@@ -47,7 +47,7 @@
 		
 		<h3>Categorias Cadastradas</h3>
 
-		<p:dataTable var="cat" value="#{categoriaMB.categorias}" id="Categoria" editable="true">
+		<p:dataTable var="cat" value="#{categoriaMB.campeonatoAtual.categorias}" id="Categoria" editable="true">
 		
 		<p:ajax event="rowEdit" listener="#{categoriaMB.atualizar}" update="Categoria" />
 			

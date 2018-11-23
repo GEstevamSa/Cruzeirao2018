@@ -30,7 +30,7 @@ public class Categoria implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idCampeonato")
 	private Campeonato campeonato;
-	@OneToMany(cascade=CascadeType.ALL , mappedBy="categoria")
+	@OneToMany(cascade=CascadeType.PERSIST , mappedBy="categoria")
 	private ArrayList<Fase> fases = new ArrayList<Fase>();
 	
 	private String nome;

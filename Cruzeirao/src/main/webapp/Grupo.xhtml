@@ -21,10 +21,10 @@
 		<h:panelGrid columns="2" cellpadding="5">
 
 			<p:outputLabel value="Nome: "/>
-			<p:inputText value="#{grupoMB.camp.nome}"/>
+			<p:inputText value="#{grupoMB.novoGrupo.nome}"/>
 
 			<p:outputLabel value="Numero: " />
-			<p:inputText value="#{grupoMB.camp.numero}" />
+			<p:inputText value="#{grupoMB.novoGrupo.numero}" />
 
 		</h:panelGrid>
 
@@ -36,7 +36,7 @@
 		
 		</h3>
 
-		<p:dataTable var="gru" value="#{grupoMB.lista}">
+		<p:dataTable var="gru" value="#{grupoMB.}">
 
 			<p:column colspan="2" headerText="Nome do Grupo">
 				<p:outputLabel value="#{gru.nome}" />

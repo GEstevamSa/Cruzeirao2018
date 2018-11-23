@@ -1,9 +1,12 @@
 package managedbean;
 
 import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
 import org.primefaces.event.RowEditEvent;
+
 import cruzeiro.Categoria;
 import cruzeiro.Fase;
 import cruzeiro.Grupo;
@@ -23,9 +26,12 @@ public class FaseMB {
 		private Grupo novoGrupo;
 			
 		public String salvar() {
-			
+			novaFase.setCategoria(categoriaAtual);
+			categoriaAtual.addFases(novaFase);
 			faseService.save(novaFase);
 			novaFase = new Fase();
+			categoriaService.closeEntityManager();
+			faseService.closeEntityManager();
 			return "fase";
 		}
 		
@@ -97,14 +103,6 @@ public class FaseMB {
 
 		public void setNovoGrupo(Grupo novoGrupo) {
 			this.novoGrupo = novoGrupo;
-		}
-		
-		public String salvarFase()
-		{
-			novaCategoria.addFases(novaFase);
-			novaFase.setCategoria(novaCategoria);
-			
-			return "Fase";
 		}
 		
 		public String verFases(Categoria categoria) {

@@ -1,5 +1,6 @@
 package cruzeiro;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,9 @@ import javax.persistence.TemporalType;
 
 import org.primefaces.event.SelectEvent;
 @Entity
-public class Fase {
+public class Fase implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name= "id")
@@ -81,6 +84,11 @@ public class Fase {
 	
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+	
+	public void addGrupos(Grupo grupo)
+	{
+		grupos.add(grupo);
 	}
 
 }

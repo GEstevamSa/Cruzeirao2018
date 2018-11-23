@@ -22,14 +22,16 @@ public class CategoriaMB {
 	private Categoria novaCategoria = new Categoria();
 	private Categoria categoriaAtual;
 	private Campeonato campeonatoAtual;
-	private Campeonato novoCampeonato = new Campeonato();
 	private Fase novaFase;
 	
 	public String salvar() {
-		
+		novaCategoria.setCampeonato(campeonatoAtual);
+		campeonatoAtual.addCategorias(novaCategoria);
 		categoriaService.save(novaCategoria);
 		novaCategoria = new Categoria();
-		return "menu";
+		campeonatoService.closeEntityManager();
+		categoriaService.closeEntityManager();
+		return "categoria";
 	}
 	
 	public void atualizar(RowEditEvent event) {
@@ -61,18 +63,6 @@ public class CategoriaMB {
 	public void setCategoriaAtual(Categoria categoriaAtual) {
 		this.categoriaAtual = categoriaAtual;
 	}
-	
-	public String criarFases() {
-		novaFase = new Fase();
-		return "Fase";
-	}
-	
-	public String salvarFase()
-	{
-		novaCategoria.addFases(novaFase);
-		novaFase.setCategoria(novaCategoria);
-		return "Fase";
-	}
 
 	public Fase getNovaFase() {
 		return novaFase;
@@ -80,13 +70,6 @@ public class CategoriaMB {
 
 	public void setNovaFase(Fase novaFase) {
 		this.novaFase = novaFase;
-	}
-	
-	public String salvarCategoria()
-	{
-		novoCampeonato.addCategorias(novaCategoria);
-		novaCategoria.setCampeonato(novoCampeonato);
-		return "Categoria";
 	}
 	
 	public Campeonato getCampeonatoAtual() {

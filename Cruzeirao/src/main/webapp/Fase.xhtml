@@ -41,7 +41,7 @@
 		
 		<h3>Fases Cadastradas</h3>
 
-		<p:dataTable var="fas" value="#{faseMB.fases}" id="Fase" editable="true">
+		<p:dataTable var="fas" value="#{faseMB.categoriaAtual.fases}" id="Fase" editable="true">
 		
 		<p:ajax event="rowEdit" listener="#{faseMB.atualizar}" update="Fase" />
 		
