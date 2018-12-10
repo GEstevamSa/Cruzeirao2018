@@ -25,6 +25,13 @@
        		
        		<p:outputLabel value="Validade: " />
        		<p:selectBooleanButton id="valid" value="#{inscricaoMB.inscricao.validade}" onLabel="Sim" offLabel="Não" style="width:60px" />
+       		
+       		
+       		<p:outputLabel value="Categotia:" for="cat"/>
+        	<p:autoComplete id="cat" forceSelection="true" value="#{inscricaoMB.inscricao.categoria}" completeMethod="#{categoriaMB.campeonatoAtual.categorias}" />
+      		
+      		<p:outputLabel value="Equipe:" for="equip"/>
+        	<p:autoComplete id="equip" forceSelection="true" value="#{inscricaoMB.inscricao.equipe}" completeMethod="#{usuarioMB.usuarioAtual.equipes}" />
         		
 		</h:panelGrid>
 
@@ -45,9 +52,9 @@
 				<p:outputLabel value="#{ins.validade}" />
 			</p:column>
 			
-			<p:column colspan="2" headerText="Equipes">
-				<p:outputLabel value="#{ins.nomeEquipe}" />
-			</p:column>
+<!-- 			<p:column colspan="2" headerText="Equipes"> -->
+<!-- 				<p:outputLabel value="#{ins.usuarioMB.usuarioAtual.equipes}" /> -->
+<!-- 			</p:column> -->
 			
 
 		</p:dataTable>

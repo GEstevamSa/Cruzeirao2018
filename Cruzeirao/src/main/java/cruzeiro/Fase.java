@@ -32,7 +32,7 @@ public class Fase implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idCategoria")
 	private Categoria categoria;
-	@OneToMany(cascade=CascadeType.PERSIST , mappedBy="fase")
+	@OneToMany(cascade=CascadeType.ALL , mappedBy="fase")
 	private static ArrayList<Grupo> grupos = new ArrayList<>();
 	@Temporal(TemporalType.DATE)
 	private Date dataInicio;

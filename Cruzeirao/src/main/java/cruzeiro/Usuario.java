@@ -38,7 +38,7 @@ public class Usuario implements Serializable{
 	private String telefoneMovel;
 	private String endereco;
 	
-	@OneToMany(cascade=CascadeType.PERSIST, mappedBy= "usuario")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy= "usuario")
 	private ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 	
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy= "usuario")

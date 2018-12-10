@@ -18,7 +18,6 @@ public class Inscricao implements Serializable{
 	@Id
 	//@GeneratedValue(strategy=GenerationType.AUTO)
 	private long numero;
-	
 	@ManyToOne
 	@JoinColumn(name="id_categoria")
 	private Categoria categoria;

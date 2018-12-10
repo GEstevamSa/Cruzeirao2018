@@ -9,20 +9,23 @@ import javax.faces.bean.SessionScoped;
 import cruzeiro.Grupo;
 import cruzeiro.Inscricao;
 import cruzeiro.Partida;
+import service.GrupoService;
 import service.PartidaService;
 
 @ManagedBean
 @SessionScoped
 public class RodadaMB {
-	
+	private GrupoService grupoService = new GrupoService();
 	private PartidaService partidaService = new PartidaService();
 	private Partida novaPartida = new Partida();
+	private Partida partidaAtual;
+	private Grupo grupoAtual;
+	private Grupo novoGrupo = new Grupo();
 	private Inscricao novaInscricao;
-	private Grupo novoGrupo;
+	
 	
 	public String salvar() {
-		partidaService.salvar(novaPartida);
-		novaPartida = new Partida();
+
 		return "menu";
 	}
 	

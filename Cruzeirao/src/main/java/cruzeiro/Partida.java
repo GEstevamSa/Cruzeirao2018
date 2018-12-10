@@ -72,13 +72,6 @@ public class Partida {
 		this.proxPartida = proxPartida;
 	}
 	
-	public Grupo getGrupo() {
-		return grupo;
-	}
-	
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
-	}
 	
 	public String getRelatoJuiz() {
 		return relatoJuiz;
